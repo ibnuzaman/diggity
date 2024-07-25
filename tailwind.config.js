@@ -22,6 +22,7 @@ export default {
                 'grayish-blue': '#90A5BB',
                 'catalina-blue': '#14286D',
                 'oxford-blue': '#0D1A48',
+                'breadcumb-active': '#1B3591',
                 'primary': '#305EFF'
             }
         },

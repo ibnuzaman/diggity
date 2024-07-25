@@ -111,9 +111,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- Footer --}}
-
     <div class="flex p-24 text-white bg-catalina-blue gap-36">
-
         <div class="flex flex-col gap-12 w-96">
             <div class="flex items-center gap-6">
                 <img src="{{ asset('asset/logo.png') }}" alt="logo" class="w-24 h-24">

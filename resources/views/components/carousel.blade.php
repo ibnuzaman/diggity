@@ -12,7 +12,9 @@
                             untuk bisnis Anda.
                             Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
                             sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-primary-button class="w-fit" color="primary">Hubungi Kami</x-primary-button>
+                        <a href="{{ route('contact-us') }}" wire:navigate>
+                            <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
+                        </a>
                     </div>
 
                     <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"

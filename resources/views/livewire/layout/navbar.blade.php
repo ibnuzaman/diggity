@@ -10,9 +10,9 @@ new class extends Component {
 <nav class="border-gray-200 bg-ghost-white dark:border-gray-600 dark:bg-gray-900">
     <div class="bg-white">
         <div class="container flex items-center justify-between p-4 mx-auto">
-            <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="{{ asset('asset/logo.png') }}" class="size-14" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Diggity</span>
             </a>
             <button type="button"
                 class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
