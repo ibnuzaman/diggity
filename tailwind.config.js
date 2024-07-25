@@ -16,6 +16,9 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 inter: ['Inter', 'sans-serif'],
             },
+            boxShadow: {
+                'collaboration-type': '0 2px 16px 0 rgba(25, 40, 57, 0.09)',
+            },
             colors: {
                 'ghost-white': '#F5F8FF',
                 'azureish-white': '#D8E4FD',

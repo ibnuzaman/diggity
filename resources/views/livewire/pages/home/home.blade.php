@@ -39,19 +39,74 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
         <div class="container mx-auto space-y-12 text-center">
             <h2 class="text-3xl font-semibold">Model Kerja Sama</h2>
             <p>Sesuaikanlah model proyek dengan kebutuhan yang Anda miliki untuk mencapai hasil yang optimal.</p>
-            <div class="grid grid-cols-3">
-                <div class="p-5 space-y-6 bg-white rounded-lg shadow text-start">
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="card image" class="w-20 h-20">
-                    <h3 class="text-2xl font-semibold">Card Title</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi tempora labore consectetur
-                        harum maxime accusantium. Eligendi odio voluptatem quidem aspernatur, magni voluptas ullam
-                        facilis amet culpa quisquam nam aperiam error.
-                    </p>
-                    @for ($i = 0; $i < 4; $i++)
-                        <p>{{ $i }}. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, obcaecati?
-                        </p>
-                    @endfor
+            <div class="grid grid-cols-3 gap-7">
+                <x-item-collaboration-type title="Project Based"
+                    description="Tenaga kerja yang dikhususkan untuk menangani proyek Anda." :benefits="[
+                        'Tim eksklusif yang hanya bekerja untuk Anda.',
+                        'Mengurangi biaya manajemen sumber daya manusia (SDM).',
+                        'Menghilangkan kebutuhan untuk mengurus proses perekrutan.',
+                        'Cocok untuk pengembangan platform digital yang dinamis.',
+                    ]" />
+
+                <x-item-collaboration-type title="Dedicated Team"
+                    description="Tim ahli untuk mengembangkan platform digital bisnis perusahaan Anda."
+                    :benefits="[
+                        'Proyek disesuaikan dengan tujuan bisnis Anda.',
+                        'Harga dan jadwal pengerjaan yang transparan.',
+                        'Menawarkan garansi kualitas selama satu bulan.',
+                        'Ideal untuk pengembangan platform digital baru.',
+                    ]" />
+                <x-item-collaboration-type title="On Demand"
+                    description="Tim yang siap untuk menangani segala permasalahan dan kebutuhan platform digital Anda."
+                    :benefits="[
+                        'Lebih fleksibel dalam menanggapi kebutuhan Anda.',
+                        'Pengerjaan didasarkan pada permintaan yang diajukan.',
+                        'Menawarkan biaya yang lebih terjangkau.',
+                        'Ideal untuk pengembangan fitur dan pemeliharaan platform.',
+                    ]" />
+                {{-- <div class="p-5 space-y-6 bg-white rounded-lg shadow-[0_2px_16px_0_rgba(25,40,57,0.09)] text-start">
+                    <img src="{{ asset('asset/collaboration_type/dedicated_team.png') }}" alt="dedicated team"
+                        class="size-20">
+                    <h3 class="pb-3 text-2xl font-semibold border-b">Dedicated Team</h3>
+                    <p>Tim ahli untuk mengembangkan platform digital bisnis perusahaan Anda.</p>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Proyek disesuaikan dengan tujuan bisnis Anda.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Harga dan jadwal pengerjaan yang transparan.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Menawarkan garansi kualitas selama satu bulan.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Ideal untuk pengembangan platform digital baru.</p>
+                    </div>
                 </div>
+                <div class="p-5 space-y-6 bg-white rounded-lg shadow-[0_2px_16px_0_rgba(25,40,57,0.09)] text-start">
+                    <img src="{{ asset('asset/collaboration_type/on_demand.png') }}" alt="on demand" class="size-20">
+                    <h3 class="pb-3 text-2xl font-semibold border-b">On Demand</h3>
+                    <p>Tim yang siap untuk menangani segala permasalahan dan kebutuhan platform digital Anda.</p>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Lebih fleksibel dalam menanggapi kebutuhan Anda.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Pengerjaan didasarkan pada permintaan yang diajukan.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Menawarkan biaya yang lebih terjangkau.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <x-svgs.check-circle />
+                        <p>Ideal untuk pengembangan fitur dan pemeliharaan platform.</p>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </div>
