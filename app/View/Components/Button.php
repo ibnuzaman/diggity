@@ -8,10 +8,6 @@ use Illuminate\View\Component;
 
 class Button extends Component
 {
-    public function __construct(
-        public string $color,
-    ) {
-    }
     public function render(): View
     {
         return view('components.button');

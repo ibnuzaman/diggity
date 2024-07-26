@@ -9,28 +9,40 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     <x-carousel carouselNum="1" />
 
     {{-- Layanan --}}
-    <div class="py-24 bg-azureish-white">
+    <div class="py-24 bg-secondary">
         <div class="container mx-auto space-y-12 text-center">
             <h2 class="text-3xl font-semibold">Layanan Kami</h2>
             <p>Kami memotivasi diri kami untuk mengaplikasikan kreativitas dalam setiap proyek, termasuk dalam
                 optimalisasi
                 penggunaan anggaran dan waktu</p>
             {{-- Card --}}
-            <div class="grid grid-cols-3">
-                <div class="p-5 space-y-6 bg-white rounded-lg shadow text-start">
-                    <h3 class="text-2xl font-semibold">Card Title</h3>
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="card image"
-                        class="object-cover w-full rounded-lg h-44">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit ex minus aspernatur alias ipsum,
-                        nemo
-                        saepe facere qui blanditiis eius voluptatibus nulla magnam atque fuga, suscipit possimus et
-                        placeat
-                        itaque.</p>
-                    <x-outline-button>
-                        Pelajari Selengkapnya</x-outline-button>
-                </div>
+            <div class="grid grid-cols-3 gap-7">
+                <x-item-service-card>
+                    <x-slot:title>Website Development</x-slot:title>
+                    <x-slot:description>
+                        Dengan bantuan tim developer yang berpengalaman, kami selalu memperhitungkan
+                        kesesuaian teknologi dengan kebutuhan masing-masing bisnis. Kami memastikan bahwa situs web yang
+                        kami bangun tidak hanya cepat, tetapi juga ramah terhadap SEO dan user-friendly.
+                    </x-slot:description>
+                </x-item-service-card>
+                <x-item-service-card>
+                    <x-slot:title>Mobile App Development</x-slot:title>
+                    <x-slot:description>
+                        Optimalkan mobilitas dan reputasi merek bisnis Anda melalui pengembangan aplikasi mobile
+                        (Android & iOS). Capai lebih banyak pelanggan dan persiapkan bisnis Anda untuk bersaing di era
+                        digital saat ini
+                    </x-slot:description>
+                </x-item-service-card>
+                <x-item-service-card>
+                    <x-slot:title>Digital Marketing</x-slot:title>
+                    <x-slot:description>
+                        Mendukung beragam jenis bisnis Anda, mulai dari skala kecil seperti bisnis rumahan dan UMKM,
+                        hingga bisnis rintisan (startup) dan perusahaan besar, dalam menerapkan strategi pemasaran
+                        digital yang efektif.
+                    </x-slot:description>
+                </x-item-service-card>
             </div>
-            <p class="font-medium text-primary text-end">Lihat Semua Layanan</p>
+            <a href="#" class="block font-medium text-primary text-end">Lihat Semua Layanan</a>
         </div>
     </div>
 
@@ -40,15 +52,16 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
             <h2 class="text-3xl font-semibold">Model Kerja Sama</h2>
             <p>Sesuaikanlah model proyek dengan kebutuhan yang Anda miliki untuk mencapai hasil yang optimal.</p>
             <div class="grid grid-cols-3 gap-7">
-                <x-item-collaboration-type title="Project Based"
+                <x-item-collaboration-type :href="route('project-based')" title="Project Based"
                     description="Tenaga kerja yang dikhususkan untuk menangani proyek Anda." :benefits="[
                         'Tim eksklusif yang hanya bekerja untuk Anda.',
                         'Mengurangi biaya manajemen sumber daya manusia (SDM).',
                         'Menghilangkan kebutuhan untuk mengurus proses perekrutan.',
                         'Cocok untuk pengembangan platform digital yang dinamis.',
-                    ]" />
+                    ]"
+                    wire:navigate />
 
-                <x-item-collaboration-type title="Dedicated Team"
+                <x-item-collaboration-type :href="route('dedicated-team')" title="Dedicated Team"
                     description="Tim ahli untuk mengembangkan platform digital bisnis perusahaan Anda."
                     :benefits="[
                         'Proyek disesuaikan dengan tujuan bisnis Anda.',
@@ -56,7 +69,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                         'Menawarkan garansi kualitas selama satu bulan.',
                         'Ideal untuk pengembangan platform digital baru.',
                     ]" />
-                <x-item-collaboration-type title="On Demand"
+                <x-item-collaboration-type :href="route('on-demand')" title="On Demand"
                     description="Tim yang siap untuk menangani segala permasalahan dan kebutuhan platform digital Anda."
                     :benefits="[
                         'Lebih fleksibel dalam menanggapi kebutuhan Anda.',
@@ -64,55 +77,12 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                         'Menawarkan biaya yang lebih terjangkau.',
                         'Ideal untuk pengembangan fitur dan pemeliharaan platform.',
                     ]" />
-                {{-- <div class="p-5 space-y-6 bg-white rounded-lg shadow-[0_2px_16px_0_rgba(25,40,57,0.09)] text-start">
-                    <img src="{{ asset('asset/collaboration_type/dedicated_team.png') }}" alt="dedicated team"
-                        class="size-20">
-                    <h3 class="pb-3 text-2xl font-semibold border-b">Dedicated Team</h3>
-                    <p>Tim ahli untuk mengembangkan platform digital bisnis perusahaan Anda.</p>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Proyek disesuaikan dengan tujuan bisnis Anda.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Harga dan jadwal pengerjaan yang transparan.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Menawarkan garansi kualitas selama satu bulan.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Ideal untuk pengembangan platform digital baru.</p>
-                    </div>
-                </div>
-                <div class="p-5 space-y-6 bg-white rounded-lg shadow-[0_2px_16px_0_rgba(25,40,57,0.09)] text-start">
-                    <img src="{{ asset('asset/collaboration_type/on_demand.png') }}" alt="on demand" class="size-20">
-                    <h3 class="pb-3 text-2xl font-semibold border-b">On Demand</h3>
-                    <p>Tim yang siap untuk menangani segala permasalahan dan kebutuhan platform digital Anda.</p>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Lebih fleksibel dalam menanggapi kebutuhan Anda.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Pengerjaan didasarkan pada permintaan yang diajukan.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Menawarkan biaya yang lebih terjangkau.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <x-svgs.check-circle />
-                        <p>Ideal untuk pengembangan fitur dan pemeliharaan platform.</p>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
 
     {{-- Portfolio --}}
-    <x-carousel carouselNum="2" bg="bg-azureish-white" />
+    <x-carousel carouselNum="2" bg="bg-secondary" />
 
     {{-- Tentang Kami --}}
     <div class="py-24">
@@ -144,86 +114,56 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
         </div>
     </div>
 
-    {{-- Tentang Kami Carousel --}}
-    <x-carousel carouselNum="3" bg="bg-azureish-white" class="container px-8 mx-auto rounded-3xl" />
-
     {{-- Alasan Memakai Layanan --}}
     <div class="py-36">
         <div class="container mx-auto space-y-12 text-center">
             <h2 class="text-3xl font-semibold">Mengapa Memakai Layanan Diggity</h2>
             <p>Layanan Diggity Cocok untuk Memenuhi Kebutuhan Digitalisasi Bisnis Anda dengan Tepat</p>
-            <div class="grid grid-cols-3 text-start">
-                <div class="p-6 rounded shadow-lg bg-azureish-white">
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="card image" class="w-20 h-20">
-                    <h3 class="mt-3 text-2xl font-semibold">Card Title</h3>
-                    <p class="mt-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio sapiente illum,
-                        nam sed
-                        dignissimos soluta praesentium provident neque laudantium ipsa voluptatum ducimus, harum
-                        doloremque ipsam? Qui iure dolores debitis rem!</p>
-                </div>
+            <div class="grid grid-cols-3 text-start gap-x-7 gap-y-12">
+                <x-item-service-reason>
+                    <x-slot:num>1</x-slot:num>
+                    <x-slot:title>Inovasi Digital dengan Standar Internasional</x-slot:title>
+                    Kami berbasis di Yogyakarta, Indonesia, telah berpengalaman bekerja dengan klien dari berbagai
+                    negara, memastikan bahwa kami terlatih untuk memenuhi standar internasional dalam setiap proyek
+                    kami.
+                </x-item-service-reason>
+                <x-item-service-reason>
+                    <x-slot:num>2</x-slot:num>
+                    <x-slot:title>Keunggulan Tim Profesional</x-slot:title>
+                    Diggity memiliki lebih dari 100 staf ahli yang profesional di setiap bidangnya sejak tahun 2019.
+                    Dengan keahlian yang terbukti, kami siap untuk mengatasi segala kebutuhan digital bisnis Anda.
+                </x-item-service-reason>
+                <x-item-service-reason>
+                    <x-slot:num>3</x-slot:num>
+                    <x-slot:title>Beragam Layanan untuk Memenuhi Kebutuhan Anda</x-slot:title>
+                    Kami berbasis di Yogyakarta, Indonesia, telah berpengalaman bekerja dengan klien dari berbagai
+                    negara, memastikan bahwa kami terlatih untuk memenuhi standar internasional dalam setiap proyek
+                    kami.
+                </x-item-service-reason>
+                <x-item-service-reason>
+                    <x-slot:num>4</x-slot:num>
+                    <x-slot:title>Model Kerjasama yang Fleksibel</x-slot:title>
+                    Diggity memahami bahwa setiap bisnis memiliki kebutuhan digital yang berbeda. Oleh karena itu, kami
+                    menyediakan model kerjasama yang bervariasi agar dapat menawarkan solusi yang tepat untuk setiap
+                    tantangan digitalisasi perusahaan Anda.
+                </x-item-service-reason>
+                <x-item-service-reason>
+                    <x-slot:num>5</x-slot:num>
+                    <x-slot:title>Kepercayaan dari Perusahaan Terkemuka</x-slot:title>
+                    Dengan dedikasi, integritas, dan profesionalisme kami, banyak perusahaan besar di Indonesia telah
+                    mempercayakan proyek digital mereka kepada kami.
+                </x-item-service-reason>
+                <x-item-service-reason>
+                    <x-slot:num>6</x-slot:num>
+                    <x-slot:title>Pendekatan Personalisasi untuk Setiap Klien</x-slot:title>
+                    Kami berbasis di Yogyakarta, Indonesia, telah berpengalaman bekerja dengan klien dari berbagai
+                    negara, memastikan bahwa kami terlatih untuk memenuhi standar internasional dalam setiap proyek
+                    kami.
+                </x-item-service-reason>
             </div>
         </div>
     </div>
 
     {{-- Footer --}}
-    <div class="flex p-24 text-white bg-catalina-blue gap-36">
-        <div class="flex flex-col gap-12 w-96">
-            <div class="flex items-center gap-6">
-                <img src="{{ asset('asset/logo.png') }}" alt="logo" class="w-24 h-24">
-                <div class="space-y-3">
-                    <h1 class="text-4xl font-bold">Diggity</h1>
-                    <p class="text-lg">Craft Your Digital Dream</p>
-                </div>
-            </div>
-            <div class="space-y-6 text-lg font-medium">
-                <p>Minggiran, Sendangtirto, Kec. Berbah, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55573</p>
-                <p>+62 878-4305-2780</p>
-                <p>info@diggity.co.id</p>
-            </div>
-        </div>
-        <div class="grid grid-cols-3 gap-y-12">
-            <div class="space-y-6 text-lg font-medium">
-                <h2 class="text-3xl">Layanan</h2>
-                <p>Layanan Utama</p>
-                <p>Model Kerja Sama</p>
-                <p>Portofolio</p>
-            </div>
-            <div class="space-y-6 text-lg font-medium">
-                <h2 class="text-3xl">Produk</h2>
-                <p>Produk Utama</p>
-                <p>Harga</p>
-            </div>
-            <div class="space-y-6 text-lg font-medium">
-                <h2 class="text-3xl">Kelas</h2>
-                <p>Kelas Utama</p>
-                <p>Alur Belajar</p>
-                <p>Bootcamp</p>
-                <p>Webinar</p>
-                <p>Universitas dan Perusahaan</p>
-            </div>
-            <div class="space-y-6 text-lg font-medium">
-                <h2 class="text-3xl">Panduan</h2>
-                <p>Panduan</p>
-                <p>Kolaborasi</p>
-                <p>Partner Komersial</p>
-            </div>
-            <div class="space-y-6 text-lg font-medium">
-                <h2 class="text-3xl">Tentang</h2>
-                <p>Tentang Diggity</p>
-                <p>Mengapa Diggity</p>
-                <p>Karir</p>
-            </div>
-        </div>
-    </div>
-    <div class="flex justify-between px-24 py-12 text-lg font-semibold text-white bg-oxford-blue">
-        <div class="flex gap-6">
-            <p>&copy;</p>
-            <p>Copyright 2024 CV Sinergi Cita Digital</p>
-        </div>
-        <div class="flex items-center gap-6">
-            <p>Ketentuan Pengguna</p>
-            <div class="w-3 h-3 bg-white rounded-full"></div>
-            <p>Kebijakan Privasi</p>
-        </div>
-    </div>
+    <x-footer></x-footer>
 </div>

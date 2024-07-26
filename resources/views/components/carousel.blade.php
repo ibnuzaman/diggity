@@ -12,8 +12,8 @@
                             untuk bisnis Anda.
                             Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
                             sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <a href="{{ route('contact-us') }}" wire:navigate>
-                            <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
+                        <a href="{{ route('contact-us') }}" class="w-fit" wire:navigate>
+                            <x-button>Hubungi Kami</x-button>
                         </a>
                     </div>
 
@@ -32,7 +32,7 @@
                             untuk bisnis Anda.
                             Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
                             sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-primary-button class="w-fit" color="primary">Hubungi Kami</x-primary-button>
+                        <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
                     </div>
 
                     <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"
@@ -50,7 +50,7 @@
                             untuk bisnis Anda.
                             Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
                             sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-primary-button class="w-fit" color="primary">Hubungi Kami</x-primary-button>
+                        <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
                     </div>
 
                     <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"
@@ -68,7 +68,7 @@
                             untuk bisnis Anda.
                             Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
                             sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-primary-button class="w-fit" color="primary">Hubungi Kami</x-primary-button>
+                        <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
                     </div>
 
                     <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"

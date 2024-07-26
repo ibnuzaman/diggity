@@ -17,22 +17,24 @@ export default {
                 inter: ['Inter', 'sans-serif'],
             },
             boxShadow: {
-                'collaboration-type': '0 2px 16px 0 rgba(25, 40, 57, 0.09)',
+                'card': '0 2px 16px 0 rgba(25, 40, 57, 0.09)',
+                'card-secondary': '0 8px 24px 0 rgba(25, 40, 57, 0.12)'
             },
             colors: {
                 'ghost-white': '#F5F8FF',
-                'azureish-white': '#D8E4FD',
                 'grayish-blue': '#90A5BB',
                 'catalina-blue': '#14286D',
                 'oxford-blue': '#0D1A48',
-                'breadcumb-active': '#1B3591',
-                'primary': '#305EFF'
-            }
+                'breadcumb-link': '#1B3591',
+                'primary': '#305EFF',
+                'secondary': '#D8E4FD',
+                'accent': '#00BE5F',
+            },
         },
-    },
 
-    plugins: [
-        forms,
-        require('flowbite/plugin'),
-    ],
+        plugins: [
+            forms,
+            require('flowbite/plugin'),
+        ],
+    }
 };
