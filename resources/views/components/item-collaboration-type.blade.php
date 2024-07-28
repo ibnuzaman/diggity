@@ -5,7 +5,7 @@
     <p>{{ $description }}</p>
     @foreach ($benefits as $benefit)
         <div class="flex items-center gap-2">
-            <x-svgs.check-circle />
+            <img src="{{ asset('asset/icons/check-circle.png') }}" class="size-6">
             <p>{{ $benefit }}</p>
         </div>
     @endforeach

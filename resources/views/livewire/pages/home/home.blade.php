@@ -82,7 +82,14 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- Portfolio --}}
-    <x-carousel carouselNum="2" bg="bg-secondary" />
+    <x-carousel carouselNum="2" bg="bg-secondary" class="pt-24 space-y-24 text-center">
+        <div class="space-y-12">
+            <h2 class="text-3xl font-semibold">Portofolio</h2>
+            <p class="mx-72">
+                Dalam beberapa tahun terakhir, pengalaman kami telah membantu klien memulai langkahnya
+                dalam dunia digital. Lihatlah beberapa karya terbaik yang telah kami hasilkan.</p>
+        </div>
+    </x-carousel>
 
     {{-- Tentang Kami --}}
     <div class="py-24">

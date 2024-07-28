@@ -1,85 +1,64 @@
 @props(['bg' => 'bg-transparent'])
 
-<div id="default-carousel-{{ $carouselNum }}" {{ $attributes->merge(['class' => "relative w-full $bg"]) }}>
+<div id="default-carousel-{{ $carouselNum }}" {{ $attributes->merge(['class' => "relative w-full h-[1000px] $bg"]) }}>
+    {{ $slot }}
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-screen">
-        <div id="c-item-1-{{ $carouselNum }}" class="hidden duration-700 ease-in-out">
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96 text-start">
+        <div id="c-item-1-{{ $carouselNum }}" class="hidden duration-700 ease-in-out ">
             <div class="absolute block w-full -translate-x-1/2 -translate-y-1/2 h-96 top-1/2 left-1/2">
-                <div class="container grid grid-cols-2 mx-auto gap-52">
-                    <div class="flex flex-col gap-12">
-                        <h1 class="text-4xl font-semibold">Siapkah Anda untuk Mendigitalisasi Bisnis?</h1>
-                        <p class="text-base">Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
-                            untuk bisnis Anda.
-                            Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
-                            sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <a href="{{ route('contact-us') }}" class="w-fit" wire:navigate>
-                            <x-button>Hubungi Kami</x-button>
-                        </a>
-                    </div>
-
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"
-                        class="w-full h-full rounded-xl">
-
-                </div>
+                <x-hero-header src="{{ asset('asset/images/carousels/carousel1.jpeg') }}">
+                    <x-slot:type>Siapkah Anda untuk Mendigitalisasi Bisnis?</x-slot:type>
+                    <x-slot:description>
+                        Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
+                        untuk bisnis Anda.
+                        Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
+                        sesuai dengan kebutuhan bisnis Anda sendiri.
+                    </x-slot:description>
+                </x-hero-header>
             </div>
         </div>
         <div id="c-item-2-{{ $carouselNum }}" class="hidden duration-700 ease-in-out">
             <div class="absolute block w-full -translate-x-1/2 -translate-y-1/2 h-96 top-1/2 left-1/2">
-                <div class="container grid grid-cols-2 mx-auto gap-52">
-                    <div class="flex flex-col gap-12">
-                        <h1 class="text-4xl font-semibold">Siapkan Anda untuk Mendigitalisasi Bisnis?</h1>
-                        <p class="text-base">Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
-                            untuk bisnis Anda.
-                            Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
-                            sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
-                    </div>
-
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"
-                        class="w-full h-full rounded-xl">
-
-                </div>
+                <x-hero-header src="{{ asset('asset/images/carousels/carousel1.jpeg') }}">
+                    <x-slot:type>Siapkah Anda untuk Mendigitalisasi Bisnis?</x-slot:type>
+                    <x-slot:description>
+                        Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
+                        untuk bisnis Anda.
+                        Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
+                        sesuai dengan kebutuhan bisnis Anda sendiri.
+                    </x-slot:description>
+                </x-hero-header>
             </div>
         </div>
         <div id="c-item-3-{{ $carouselNum }}" class="hidden duration-700 ease-in-out">
             <div class="absolute block w-full -translate-x-1/2 -translate-y-1/2 h-96 top-1/2 left-1/2">
-                <div class="container grid grid-cols-2 mx-auto gap-52">
-                    <div class="flex flex-col gap-12">
-                        <h1 class="text-4xl font-semibold">Siapkan Anda untuk Mendigitalisasi Bisnis?</h1>
-                        <p class="text-base">Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
-                            untuk bisnis Anda.
-                            Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
-                            sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
-                    </div>
-
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"
-                        class="w-full h-full rounded-xl">
-
-                </div>
+                <x-hero-header src="{{ asset('asset/images/carousels/carousel1.jpeg') }}">
+                    <x-slot:type>Siapkah Anda untuk Mendigitalisasi Bisnis?</x-slot:type>
+                    <x-slot:description>
+                        Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
+                        untuk bisnis Anda.
+                        Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
+                        sesuai dengan kebutuhan bisnis Anda sendiri.
+                    </x-slot:description>
+                </x-hero-header>
             </div>
         </div>
         <div id="c-item-4-{{ $carouselNum }}" class="hidden duration-700 ease-in-out">
             <div class="absolute block w-full -translate-x-1/2 -translate-y-1/2 h-96 top-1/2 left-1/2">
-                <div class="container grid grid-cols-2 mx-auto gap-52">
-                    <div class="flex flex-col gap-12">
-                        <h1 class="text-4xl font-semibold">Siapkan Anda untuk Mendigitalisasi Bisnis?</h1>
-                        <p class="text-base">Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
-                            untuk bisnis Anda.
-                            Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
-                            sesuai dengan kebutuhan bisnis Anda sendiri.</p>
-                        <x-button class="w-fit" color="primary">Hubungi Kami</x-button>
-                    </div>
-
-                    <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="carousel image 1"
-                        class="w-full h-full rounded-xl">
-
-                </div>
+                <x-hero-header src="{{ asset('asset/images/carousels/carousel1.jpeg') }}">
+                    <x-slot:type>Siapkah Anda untuk Mendigitalisasi Bisnis?</x-slot:type>
+                    <x-slot:description>
+                        Bergabunglah dengan Diggity untuk mengembangkan platform digital khusus
+                        untuk bisnis Anda.
+                        Dengan layanan kami, Anda dapat membuat situs web, aplikasi mobile, dan sistem internal yang
+                        sesuai dengan kebutuhan bisnis Anda sendiri.
+                    </x-slot:description>
+                </x-hero-header>
             </div>
         </div>
     </div>
     <!-- Slider indicators -->
-    <div class="absolute z-30 flex items-center space-x-3 -translate-x-1/2 bottom-5 left-1/2 rtl:space-x-reverse">
+    <div class="absolute z-30 flex items-center space-x-3 -translate-x-1/2 bottom-24 left-1/2 rtl:space-x-reverse">
         <button id="c-prev-{{ $carouselNum }}" type="button"
             class="flex items-center justify-center rounded-full shadow-xl cursor-pointer group">
             <span
