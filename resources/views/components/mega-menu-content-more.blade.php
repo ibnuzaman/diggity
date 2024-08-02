@@ -3,5 +3,6 @@
         <h5 class="font-semibold">{{ $contentType }} Selengkapnya</h5>
         <p class="text-xs">Lihat selengkapnya tentang {{ Str::lower($contentType) }} kami</p>
     </div>
-    <a {{ $attributes }} class="font-medium text-primary hover:underline">Lihat Semua {{ $contentType }}</a>
+    <a {{ $attributes }} class="font-medium text-primary hover:underline" wire:navigate>Lihat Semua
+        {{ $contentType }}</a>
 </div>

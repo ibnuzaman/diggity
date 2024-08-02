@@ -2,36 +2,62 @@
 
 use Livewire\Volt\Component;
 use Livewire\Attributes\{Layout, Title};
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use App\Models\Collaboration;
+use App\Models\Regency;
+use App\Models\Region;
+use App\Models\Service;
 
-new #[Layout('layouts.app')] #[Title('Contact Us')] class extends Component {}; ?>
+new #[Layout('layouts.app')] #[Title('Contact Us')] class extends Component {
+    public int $page = 1;
 
-<div class="py-24">
+    public string $name;
+    public string $phoneNumber;
+    public string $email;
+    public string $service;
+    public string $collabType;
+    public string $selectedRegion;
+    public string $selectedRegency;
+
+    public function with(): array
+    {
+        return [
+            'services' => Service::all(),
+            'collaborations' => Collaboration::all(),
+            'regions' => Region::all(),
+            'regencies' => Regency::all(),
+        ];
+    }
+
+    public function nextPage()
+    {
+        if ($this->page < 3) {
+            ++$this->page;
+        }
+    }
+
+    public function store(Request $request)
+    {
+        $arr = [$this->selectedRegion, $this->selectedRegency];
+        dd($arr);
+    }
+
+    public function prevPage()
+    {
+        if ($this->page > 0) {
+            --$this->page;
+        }
+    }
+};
+?>
+
+<div class="py-24 space-y-12">
     {{-- Breadcumb --}}
-    <div class="container flex mx-auto">
-        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-            <li class="inline-flex items-center">
-                <a href="{{ route('home') }}"
-                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <div class="flex items-center">
-                    <svg class="mx-1 text-gray-900 size-4 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 9 4-4-4-4" />
-                    </svg>
-                    <a href="#"
-                        class="text-base font-semibold ms-1 hover:text-breadcumb-active md:ms-2 dark:text-gray-400 dark:hover:text-white text-breadcumb-active">Hubungi
-                        Kami</a>
-                </div>
-            </li>
-        </ol>
+    <div class="container mx-auto">
+        <x-breadcumb>
+            <x-breadcumb-link>Hubungi Kami</x-breadcumb-link>
+        </x-breadcumb>
     </div>
 
     {{-- Body --}}
@@ -42,23 +68,145 @@ new #[Layout('layouts.app')] #[Title('Contact Us')] class extends Component {}; 
                 Segera bangun platform digital bisnis Anda bersama kami.</p>
         </div>
         <div class="space-y-6">
-            <h3 class="text-2xl">Tahap 1 dari 3</h3>
+            <h3 class="text-2xl">Tahap {{ $page }} dari 3</h3>
             <p>Bagaimana cara kami menghubungi Anda?</p>
         </div>
-        <div class="flex flex-col gap-3">
-            <label for="name" class="self-start">Nama Lengkap</label>
-            <x-text-input class="w-full" />
-        </div>
-        <div class="flex flex-col gap-3">
-            <label for="phoneNumber" class="self-start">Nomor Telepon</label>
-            <x-text-input class="w-full" />
-        </div>
-        <div class="flex flex-col gap-3">
-            <label for="email" class="self-start">Email</label>
-            <x-text-input class="w-full" />
-        </div>
-        <a href="{{ route('contact-us-2') }}" class="block" wire:navigate>
-            <x-button class="flex ms-auto w-fit" color="primary">Berikutnya</x-button>
-        </a>
+        <form wire:submit="store" class="space-y-12">
+            @switch($page)
+                @case(1)
+                    <div class="flex flex-col gap-3">
+                        <label for="name" class="self-start">Nama Lengkap</label>
+                        <x-text-input class="w-full" placeholder="Nama Lengkap" wire:model="name" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="phoneNumber" class="self-start">Nomor Telepon</label>
+                        <x-text-input class="w-full" placeholder="Nomor Telepon" wire:model='phoneNumber' />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="email" class="self-start">Email</label>
+                        <x-text-input class="w-full" placeholder="Email" wire:model='email' />
+                    </div>
+                    <x-button class="flex ms-auto w-fit" wire:click="nextPage">Berikutnya</x-button>
+                @break
+
+                @case(2)
+                    <div class="flex flex-col gap-3">
+                        <label for="layanan" class="self-start">Layanan yang Dibutuhkan</label>
+                        <div class="grid grid-cols-3 font-normal gap-y-4">
+                            @foreach ($services as $service)
+                                <x-radio-button :labelName="$service->name" wire:model='service' />
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="collaborateType" class="self-start">Model Kerjasama yang Diinginkan</label>
+                        <div class="flex flex-col font-normal gap-y-4">
+                            @foreach ($collaborations as $collaboration)
+                                <x-radio-button :labelName="$collaboration->type" wire:model='collabType' />
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="detail" class="self-start">Detail Proyek</label>
+                        <textarea id="detail" rows="8"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-md border border-gray-300 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"></textarea>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="countries" class="self-start">Jadwal</label>
+                        <select id="countries"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                            <option selected>Pilih Jadwal</option>
+                            <option value="1">Belum Tahu</option>
+                            <option value="2">1 Bulan - 3 Bulan</option>
+                            <option value="3">3 Bulan - 6 Bulan</option>
+                            <option value="4">6 Bulan - 12 Bulan</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="countries" class="self-start">Anggaran</label>
+                        <select id="countries"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                            <option selected>Tentukan Anggaran</option>
+                            <option value="1">&lt; Rp10.000.000</option>
+                            <option value="2">Rp10.000.000 - Rp50.000.000</option>
+                            <option value="3">Rp50.000.000 - Rp100.000.000</option>
+                            <option value="4">&gt; Rp100.000.000</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between">
+                        <x-outline-button class="bg-white" wire:click='prevPage'>Kembali</x-outline-button>
+                        <x-button wire:click='nextPage'>Berikutnya</x-button>
+                    </div>
+                @break
+
+                @case(3)
+                    <div class="flex flex-col gap-3">
+                        <label for="companyName" class="self-start">Nama Perusahaan</label>
+                        <x-text-input class="w-full" placeholder="Nama Perusahaan" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="position" class="self-start">Posisi Anda</label>
+                        <x-text-input class="w-full" placeholder="Posisi Anda" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="employee" class="self-start">Jumlah Karyawan</label>
+                        <select id="employee"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                            <option selected>Jumlah Karyawan</option>
+                            <option value="1">&lt; 50</option>
+                            <option value="2">50 - 100</option>
+                            <option value="3">100 - 200</option>
+                            <option value="4">&gt; 200</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="businessType" class="self-start">Jenis Usaha</label>
+                        <select id="businessType"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                            <option selected>Jenis Usaha</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="businessOperated" class="self-start">Berapa Lama Usaha Berlangsung</label>
+                        <select id="businessOperated"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
+                            <option selected>Pilih Lama Usaha</option>
+                            <option value="1">&lt; 1 Tahun</option>
+                            <option value="2">1 Tahun - 5 Tahun</option>
+                            <option value="3">5 Tahun - 10 Tahun</option>
+                            <option value="4">&gt; 10 Tahun</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="region" class="self-start">Pilih Provinsi</label>
+                        <select id="region"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                            wire:model.live='selectedRegion'>
+                            <option value="" selected>Pilih Provinsi</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label for="regency" class="self-start">Pilih Kabupaten/Kota</label>
+                        <select id="regency"
+                            class="bg-white border border-gray-300 font-normal text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                            wire:model.live='selectedRegency' wire:key='{{ $selectedRegion }}'>
+                            <option value="" selected>Pilih Kabupaten/Kota</option>
+                            @foreach (Region::find($selectedRegion)->regencies ?? [] as $regency)
+                                <option value="{{ $regency->id }}">{{ $regency->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="flex justify-between">
+                        <x-outline-button class="bg-white" wire:click='prevPage'>Kembali</x-outline-button>
+                        <x-button type="submit">Kirim</x-button>
+                    </div>
+                @break
+
+                @default
+            @endswitch
+        </form>
     </main>
 </div>
