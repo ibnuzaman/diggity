@@ -14,6 +14,11 @@ class Region extends Model
         'name',
     ];
 
+    public function serviceOrder(): HasMany
+    {
+        return $this->hasMany(ServiceOrder::class);
+    }
+
     public function regencies(): HasMany
     {
         return $this->hasMany(Regency::class);

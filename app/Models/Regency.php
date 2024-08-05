@@ -15,6 +15,11 @@ class Regency extends Model
         'region_id',
     ];
 
+    public function serviceOrder(): BelongsTo
+    {
+        return $this->belongsTo(ServiceOrder::class);
+    }
+
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
