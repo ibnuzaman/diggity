@@ -9,7 +9,7 @@ use App\Models\Regency;
 use App\Models\Region;
 use App\Models\Service;
 
-new #[Layout('layouts.app')] #[Title('Contact Us')] class extends Component {
+new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
     public int $page = 1;
 
     public string $name;
@@ -37,17 +37,17 @@ new #[Layout('layouts.app')] #[Title('Contact Us')] class extends Component {
         }
     }
 
-    public function store(Request $request)
-    {
-        $arr = [$this->selectedRegion, $this->selectedRegency];
-        dd($arr);
-    }
-
     public function prevPage()
     {
         if ($this->page > 0) {
             --$this->page;
         }
+    }
+
+    public function store(Request $request)
+    {
+        $arr = [$this->selectedRegion, $this->selectedRegency];
+        dd($arr);
     }
 };
 ?>

@@ -21,4 +21,4 @@ Volt::route('/on-demand', 'pages.collaborationtype.on-demand')->name('on-demand'
 Volt::route('/portfolio', 'pages.portfolio.portfolio')->name('portfolio');
 Volt::route('/portfolio/{id}', 'pages.portfolio.detail-portfolio')->name('detail-portfolio');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

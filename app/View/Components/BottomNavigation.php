@@ -14,8 +14,7 @@ class BottomNavigation extends Component
     public function __construct(
         public string $prev,
         public string $next,
-    ) {
-    }
+    ) {}
 
     /**
      * Get the view / contents that represent the component.

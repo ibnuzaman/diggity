@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,8 +16,9 @@ class ServiceSeeder extends Seeder
         ['name' => 'Big Data Services'],
         ['name' => 'Product Development'],
         ['name' => 'DevOps Solutions'],
-        ['name' => 'Digital Marketing']
+        ['name' => 'Digital Marketing'],
     ];
+
     /**
      * Run the database seeds.
      */

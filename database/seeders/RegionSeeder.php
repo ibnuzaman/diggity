@@ -57,7 +57,7 @@ class RegionSeeder extends Seeder
             array_map(fn (array $e) => [
                 'name' => $e['name'],
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ], $this->regions)
         );
     }

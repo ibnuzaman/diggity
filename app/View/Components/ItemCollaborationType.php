@@ -11,8 +11,7 @@ class ItemCollaborationType extends Component
         public string $title,
         public string $description,
         public array $benefits,
-    ) {
-    }
+    ) {}
 
     public function render(): View
     {

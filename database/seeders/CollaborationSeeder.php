@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +12,7 @@ class CollaborationSeeder extends Seeder
         ['type' => 'Project Based'],
         ['type' => 'On Demand'],
     ];
+
     /**
      * Run the database seeds.
      */

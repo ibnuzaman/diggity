@@ -3,7 +3,6 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use Illuminate\View\View;
 
 class ItemBenefit extends Component
 {
@@ -11,8 +10,8 @@ class ItemBenefit extends Component
         public int $num,
         public string $title,
         public string $description,
-    ) {
-    }
+    ) {}
+
     public function render()
     {
         return view('components.item-benefit');

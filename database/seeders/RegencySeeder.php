@@ -30,8 +30,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Sabang'],
         ['name' => 'Kota Lhokseumawe'],
         ['name' => 'Kota Langsa'],
-        ['name' => 'Kota Subulussalam']
+        ['name' => 'Kota Subulussalam'],
     ];
+
     private array $sumut = [
         ['name' => 'Kab. Asahan'],
         ['name' => 'Kab. Dairi'],
@@ -64,8 +65,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Pematangsiantar'],
         ['name' => 'Kota Sibolga'],
         ['name' => 'Kota Tanjung Balai'],
-        ['name' => 'Kota Tebing Tinggi']
+        ['name' => 'Kota Tebing Tinggi'],
     ];
+
     private array $sumbar = [
         ['name' => 'Kab. Agam'],
         ['name' => 'Kab. Dharmasraya'],
@@ -85,8 +87,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Pariaman'],
         ['name' => 'Kota Payakumbuh'],
         ['name' => 'Kota Sawahlunto'],
-        ['name' => 'Kota Solok']
+        ['name' => 'Kota Solok'],
     ];
+
     private array $riau = [
         ['name' => 'Kab. Bengkalis'],
         ['name' => 'Kab. Indragiri Hulu'],
@@ -99,8 +102,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Rokan Hulu'],
         ['name' => 'Kab. Siak'],
         ['name' => 'Kota Dumai'],
-        ['name' => 'Kota Pekanbaru']
+        ['name' => 'Kota Pekanbaru'],
     ];
+
     private array $jambi = [
         ['name' => 'Kab. Batanghari'],
         ['name' => 'Kab. Bungo'],
@@ -113,8 +117,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Tanjung Jabung Timur'],
         ['name' => 'Kab. Tebo'],
         ['name' => 'Kota Jambi'],
-        ['name' => 'Kota Sungai Penuh']
+        ['name' => 'Kota Sungai Penuh'],
     ];
+
     private array $sumsel = [
         ['name' => 'Kab. Banyuasin'],
         ['name' => 'Kab. Empat Lawang'],
@@ -132,8 +137,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Lubuk Linggau'],
         ['name' => 'Kota Palembang'],
         ['name' => 'Kota Pagar Alam'],
-        ['name' => 'Kota Prabumulih']
+        ['name' => 'Kota Prabumulih'],
     ];
+
     private array $bengkulu = [
         ['name' => 'Kab. Bengkulu Selatan'],
         ['name' => 'Kab. Bengkulu Tengah'],
@@ -144,8 +150,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Muko Muko'],
         ['name' => 'Kab. Rejang Lebong'],
         ['name' => 'Kab. Seluma'],
-        ['name' => 'Kota Bengkulu']
+        ['name' => 'Kota Bengkulu'],
     ];
+
     private array $lampung = [
         ['name' => 'Kab. Lampung Barat'],
         ['name' => 'Kab. Lampung Selatan'],
@@ -161,8 +168,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Tulang Bawang Barat'],
         ['name' => 'Kab. Way Kanan'],
         ['name' => 'Kota Bandar Lampung'],
-        ['name' => 'Kota Metro']
+        ['name' => 'Kota Metro'],
     ];
+
     private array $bangkaBelitung = [
         ['name' => 'Kab. Bangka'],
         ['name' => 'Kab. Bangka Barat'],
@@ -170,8 +178,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Bangka Tengah'],
         ['name' => 'Kab. Belitung'],
         ['name' => 'Kab. Belitung Timur'],
-        ['name' => 'Kota Pangkal Pinang']
+        ['name' => 'Kota Pangkal Pinang'],
     ];
+
     private array $kepulauanRiau = [
         ['name' => 'Kab. Bintan'],
         ['name' => 'Kab. Karimun'],
@@ -179,16 +188,18 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Lingga'],
         ['name' => 'Kab. Natuna'],
         ['name' => 'Kota Batam'],
-        ['name' => 'Kota Tanjung Pinang']
+        ['name' => 'Kota Tanjung Pinang'],
     ];
+
     private array $jakarta = [
         ['name' => 'Kab. Adm. Kep. Seribu'],
         ['name' => 'Kota Adm. Jakarta Barat'],
         ['name' => 'Kota Adm. Jakarta Pusat'],
         ['name' => 'Kota Adm. Jakarta Selatan'],
         ['name' => 'Kota Adm. Jakarta Timur'],
-        ['name' => 'Kota Adm. Jakarta Utara']
+        ['name' => 'Kota Adm. Jakarta Utara'],
     ];
+
     private array $jabar = [
         ['name' => 'Kab. Bandung'],
         ['name' => 'Kab. Bandung Barat'],
@@ -213,8 +224,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Cirebon'],
         ['name' => 'Kota Depok'],
         ['name' => 'Kota Sukabumi'],
-        ['name' => 'Kota Tasikmalaya']
+        ['name' => 'Kota Tasikmalaya'],
     ];
+
     private array $jateng = [
         ['name' => 'Kab. Banyumas'],
         ['name' => 'Kab. Batang'],
@@ -247,15 +259,17 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Salatiga'],
         ['name' => 'Kota Semarang'],
         ['name' => 'Kota Surakarta'],
-        ['name' => 'Kota Tegal']
+        ['name' => 'Kota Tegal'],
     ];
+
     private array $yogyakarta = [
         ['name' => 'Kab. Bantul'],
         ['name' => 'Kab. Gunungkidul'],
         ['name' => 'Kab. Kulon Progo'],
         ['name' => 'Kab. Sleman'],
-        ['name' => 'Kota Yogyakarta']
+        ['name' => 'Kota Yogyakarta'],
     ];
+
     private array $jatim = [
         ['name' => 'Kab. Pacitan'],
         ['name' => 'Kab. Ponorogo'],
@@ -294,8 +308,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Mojokerto'],
         ['name' => 'Kota Madiun'],
         ['name' => 'Kota Surabaya'],
-        ['name' => 'Kota Batu']
+        ['name' => 'Kota Batu'],
     ];
+
     private array $banten = [
         ['name' => 'Kab. Pandeglang'],
         ['name' => 'Kab. Lebak'],
@@ -304,8 +319,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Tangerang'],
         ['name' => 'Kota Cilegon'],
         ['name' => 'Kota Serang'],
-        ['name' => 'Kota Tangerang Selatan']
+        ['name' => 'Kota Tangerang Selatan'],
     ];
+
     private array $bali = [
         ['name' => 'Kab. Jembrana'],
         ['name' => 'Kab. Tabanan'],
@@ -315,8 +331,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Bangli'],
         ['name' => 'Kab. Karangasem'],
         ['name' => 'Kab. Buleleng'],
-        ['name' => 'Kota Denpasar']
+        ['name' => 'Kota Denpasar'],
     ];
+
     private array $ntb = [
         ['name' => 'Kab. Lombok Barat'],
         ['name' => 'Kab. Lombok Tengah'],
@@ -327,8 +344,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Sumbawa Barat'],
         ['name' => 'Kab. Lombok Utara'],
         ['name' => 'Kota Mataram'],
-        ['name' => 'Kota Bima']
+        ['name' => 'Kota Bima'],
     ];
+
     private array $ntt = [
         ['name' => 'Kab. Kupang'],
         ['name' => 'Kab Timor Tengah Selatan'],
@@ -351,8 +369,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Manggarai Timur'],
         ['name' => 'Kab. Sabu Raijua'],
         ['name' => 'Kab. Malaka'],
-        ['name' => 'Kota Kupang']
+        ['name' => 'Kota Kupang'],
     ];
+
     private array $kalbar = [
         ['name' => 'Kab. Sambas'],
         ['name' => 'Kab. Mempawah'],
@@ -367,8 +386,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Kayong Utara'],
         ['name' => 'Kab. Kubu Raya'],
         ['name' => 'Kota Pontianak'],
-        ['name' => 'Kota Singkawang']
+        ['name' => 'Kota Singkawang'],
     ];
+
     private array $kalteng = [
         ['name' => 'Kab. Kotawaringin Barat'],
         ['name' => 'Kab. Kotawaringin Timur'],
@@ -383,8 +403,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Pulang Pisau'],
         ['name' => 'Kab. Murung Raya'],
         ['name' => 'Kab. Barito Timur'],
-        ['name' => 'Kota Palangkaraya']
+        ['name' => 'Kota Palangkaraya'],
     ];
+
     private array $kalsel = [
         ['name' => 'Kab. Tanah Laut'],
         ['name' => 'Kab. Kotabaru'],
@@ -398,8 +419,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Tanah Bumbu'],
         ['name' => 'Kab. Balangan'],
         ['name' => 'Kota Banjarmasin'],
-        ['name' => 'Kota Banjarbaru']
+        ['name' => 'Kota Banjarbaru'],
     ];
+
     private array $kaltim = [
         ['name' => 'Kab. Paser'],
         ['name' => 'Kab. Kutai Kartanegara'],
@@ -410,15 +432,17 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Mahakam Ulu'],
         ['name' => 'Kota Balikpapan'],
         ['name' => 'Kota Samarinda'],
-        ['name' => 'Kota Bontang']
+        ['name' => 'Kota Bontang'],
     ];
+
     private array $kaltara = [
         ['name' => 'Kab. Bulungan'],
         ['name' => 'Kab. Malinau'],
         ['name' => 'Kab. Nunukan'],
         ['name' => 'Kab. Tana Tidung'],
-        ['name' => 'Kota Tarakan']
+        ['name' => 'Kota Tarakan'],
     ];
+
     private array $sulut = [
         ['name' => 'Kab. Bolaang Mongondow'],
         ['name' => 'Kab. Minahasa'],
@@ -434,8 +458,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kota Manado'],
         ['name' => 'Kota Bitung'],
         ['name' => 'Kota Tomohon'],
-        ['name' => 'Kota Kotamobagu']
+        ['name' => 'Kota Kotamobagu'],
     ];
+
     private array $sulteng = [
         ['name' => 'Kab. Banggai'],
         ['name' => 'Kab. Poso'],
@@ -449,8 +474,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Sigi'],
         ['name' => 'Kab. Banggai Laut'],
         ['name' => 'Kab. Morowali Utara'],
-        ['name' => 'Kota Palu']
+        ['name' => 'Kota Palu'],
     ];
+
     private array $sulsel = [
         ['name' => 'Kab. Kepulauan Selayar'],
         ['name' => 'Kab. Bulukumba'],
@@ -475,8 +501,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Toraja Utara'],
         ['name' => 'Kota Makassar'],
         ['name' => 'Kota Pare Pare'],
-        ['name' => 'Kota Palopo']
+        ['name' => 'Kota Palopo'],
     ];
+
     private array $sultra = [
         ['name' => 'Kab. Kolaka'],
         ['name' => 'Kab. Konawe'],
@@ -494,24 +521,27 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Buton Tengah'],
         ['name' => 'Kab. Buton Selatan'],
         ['name' => 'Kota Kendari'],
-        ['name' => 'Kota Bau Bau']
+        ['name' => 'Kota Bau Bau'],
     ];
+
     private array $gorontalo = [
         ['name' => 'Kab. Gorontalo'],
         ['name' => 'Kab. Boalemo'],
         ['name' => 'Kab. Bone Bolango'],
         ['name' => 'Kab. Pahuwato'],
         ['name' => 'Kab. Gorontalo Utara'],
-        ['name' => 'Kota Gorontalo']
+        ['name' => 'Kota Gorontalo'],
     ];
+
     private array $sulbar = [
         ['name' => 'Kab. Pasangkayu'],
         ['name' => 'Kab. Mamuju'],
         ['name' => 'Kab. Mamasa'],
         ['name' => 'Kab. Polewali Mandar'],
         ['name' => 'Kab. Majene'],
-        ['name' => 'Kab. Mamuju Tengah']
+        ['name' => 'Kab. Mamuju Tengah'],
     ];
+
     private array $maluku = [
         ['name' => 'Kab. Maluku Tengah'],
         ['name' => 'Kab. Maluku Tenggara'],
@@ -523,8 +553,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Maluku Barat Daya'],
         ['name' => 'Kab. Buru Selatan'],
         ['name' => 'Kota Ambon'],
-        ['name' => 'Kota Tual']
+        ['name' => 'Kota Tual'],
     ];
+
     private array $malukuUtara = [
         ['name' => 'Kab. Halmahera Barat'],
         ['name' => 'Kab. Halmahera Tengah'],
@@ -535,8 +566,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Pulau Morotai'],
         ['name' => 'Kab. Pulau Taliabu'],
         ['name' => 'Kota Ternate'],
-        ['name' => 'Kota Tidore Kepulauan']
+        ['name' => 'Kota Tidore Kepulauan'],
     ];
+
     private array $papua = [
         ['name' => 'Kab. Jayapura'],
         ['name' => 'Kab. Kepulauan Yapen'],
@@ -546,8 +578,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Waropen'],
         ['name' => 'Kab. Supiori'],
         ['name' => 'Kab. Mamberamo Raya'],
-        ['name' => 'Kota Jayapura']
+        ['name' => 'Kota Jayapura'],
     ];
+
     private array $papuaBarat = [
         ['name' => 'Kab. Fak Fak'],
         ['name' => 'Kab. Kaimana'],
@@ -564,15 +597,17 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Sorong Selatan'],
         ['name' => 'Kab. Raja Ampat'],
         ['name' => 'Kab. Tambrauw'],
-        ['name' => 'Kota Sorong']
+        ['name' => 'Kota Sorong'],
 
     ];
+
     private array $papuaSelatan = [
         ['name' => 'Kab. Merauke'],
         ['name' => 'Kab. Boven Digoel'],
         ['name' => 'Kab. Mappi'],
-        ['name' => 'Kab. Asmat']
+        ['name' => 'Kab. Asmat'],
     ];
+
     private array $papuaTengah = [
         ['name' => 'Kab. Nabire'],
         ['name' => 'Kab. Puncak Jaya'],
@@ -581,8 +616,9 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Puncak'],
         ['name' => 'Kab. Dogiyai'],
         ['name' => 'Kab. Intan Jaya'],
-        ['name' => 'Kab. Deiyai']
+        ['name' => 'Kab. Deiyai'],
     ];
+
     private array $papuaPegunungan = [
         ['name' => 'Kab. Jayawijaya'],
         ['name' => 'Kab. Pegunungan Bintang'],
@@ -591,7 +627,7 @@ class RegencySeeder extends Seeder
         ['name' => 'Kab. Mamberamo Tengah'],
         ['name' => 'Kab. Yalimo'],
         ['name' => 'Kab. Lanny Jaya'],
-        ['name' => 'Kab. Nduga']
+        ['name' => 'Kab. Nduga'],
     ];
 
     /**
@@ -647,7 +683,7 @@ class RegencySeeder extends Seeder
             'name' => $e['name'],
             'region_id' => $regionId,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ], $region);
     }
 }
