@@ -7,7 +7,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
 
 <div>
     {{-- Header --}}
-    <header class="space-y-12 bg-secondary py-36">
+    <header class="lg:space-y-6 xl:space-y-12 bg-secondary lg:py-12 xl:py-36">
         <div class="container flex mx-auto">
             <x-breadcumb>
                 <x-breadcumb-link href="#">Dedicated Team</x-breadcumb-link>
@@ -23,10 +23,10 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </header>
 
     {{-- Benefit --}}
-    <div class="container mx-auto my-24 space-y-12 text-center">
-        <h1 class="text-4xl font-semibold">Benefit</h1>
-        <p>Manfaat yang Anda Dapatkan</p>
-        <div class="grid grid-cols-2 gap-x-8 gap-y-12">
+    <div class="container mx-auto text-center lg:space-y-6 xl:space-y-12 lg:my-24 xl:my-36">
+        <h1 class="font-semibold lg:text-2xl xl:text-4xl">Benefit</h1>
+        <p class="lg:text-sm xl:text-base">Manfaat yang Anda Dapatkan</p>
+        <div class="grid grid-cols-2 lg:gap-x-5 xl:gap-x-8 lg:gap-y-8 xl:gap-y-12">
             <x-item-benefit num="1" title="Kandidat Berkualitas Tinggi"
                 description="Kami melakukan seleksi ketat untuk memastikan setiap kandidat yang kami rekrut memiliki kualitas yang tinggi dalam menyelesaikan tantangan digital Anda." />
             <x-item-benefit num="2" title="Interview Langsung"
@@ -43,11 +43,11 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- FAQ --}}
-    <div class="py-24 bg-secondary">
+    <div class="lg:py-12 xl:py-24 bg-secondary">
         <div class="container mx-auto">
-            <h3 class="text-xl font-semibold text-accent">Frequently Asked Question</h3>
-            <h2 class="mt-6 mb-12 text-3xl font-semibold">Pelajari Lebih Lanjut</h2>
-            <div class="flex flex-col gap-6">
+            <h3 class="font-semibold lg:text-base xl:text-xl text-accent">Frequently Asked Question</h3>
+            <h2 class="font-semibold xl:mb-12 lg:mb-6 lg:mt-3 xl:mt-6 lg:text-xl xl:text-3xl">Pelajari Lebih Lanjut</h2>
+            <div class="flex flex-col lg:gap-4 xl:gap-6">
                 <x-item-faq>
                     <x-slot:question>Apa yang dimaksud dengan model kerjasama dedicated team?</x-slot:question>
                     Model kerjasama dedicated team adalah ketika tim pengembangan, yang terdiri dari satu atau beberapa
@@ -113,13 +113,13 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- Bottom Navigation --}}
-    <div class="container mx-auto my-24">
+    <div class="container mx-auto lg:my-24 xl:my-36">
         <x-bottom-navigation prev="Project Based" next="On Demand" />
     </div>
 
     {{-- Hubungi Kami --}}
-    <div class="py-24 bg-secondary">
-        <x-hero-header src="{{ asset('asset/images/header-contact-us.jpeg') }}">
+    <div class="lg:py-12 xl:py-24 bg-secondary">
+        <x-hero-header :src="asset('asset/images/header-contact-us.jpeg')">
             <x-slot:type>Hubungi Kami</x-slot:type>
             <x-slot:description>
                 Jika Anda memiliki proyek yang ingin direalisasikan atau ingin berkolaborasi dengan kami
@@ -129,11 +129,11 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- Bottom Breadcumb --}}
-    <div class="container flex py-5 mx-auto">
+    <div class="container mx-auto lg:py-3 xl:py-5">
         <x-breadcumb>
             <x-breadcumb-link href="#">Dedicated Team</x-breadcumb-link>
         </x-breadcumb>
     </div>
 
-    <x-footer></x-footer>
+    <x-footer />
 </div>

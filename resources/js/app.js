@@ -63,5 +63,13 @@ function initCarousel(carouselNum) {
     $nextButton.addEventListener('click', () => carousel.next());
     $prevButton.addEventListener('click', () => carousel.prev());
 }
+
+function goToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 initCarousel(1);
 initCarousel(2);
+
+const goToTopButton = document.querySelector('#goToTopButton');
+goToTopButton.addEventListener('click', goToTop);

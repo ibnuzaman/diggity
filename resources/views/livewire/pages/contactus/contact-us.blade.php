@@ -31,7 +31,7 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
         ];
     }
 
-    public function nextPage()
+    public function nextPage(): void
     {
         switch ($this->page) {
             case 1:
@@ -48,13 +48,13 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
         }
     }
 
-    public function prevPage()
+    public function prevPage(): void
     {
-        if ($this->page > 0) {
+        if ($this->page > 1) {
             --$this->page;
         }
     }
-    public function store()
+    public function store(): void
     {
         $this->thirdForm->validate();
 
@@ -75,13 +75,15 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
             'regency_id' => $this->thirdForm->regency,
         ]);
 
-        return redirect(route('contact-us'))->with('message', 'Berhasil Mengirim Pesan');
+        // return back()->with('message', 'Berhasil Mengirim Pesan');
+        session()->flash('message', 'Berhasil Mengirim Pesan');
+        $this->redirectRoute('contact-us');
     }
 };
 
 ?>
 
-<div class="py-24 space-y-12">`
+<div class="lg:space-y-6 xl:space-y-12 lg:py-12 xl:py-24">
     {{-- Breadcumb --}}
     <div class="container mx-auto">
         <x-breadcumb>
@@ -90,17 +92,22 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
     </div>
 
     {{-- Body --}}
-    <main class="container max-w-screen-md mx-auto space-y-12 font-semibold text-center">
-        <div class="space-y-6">
-            <h1 class="text-4xl">Hubungi Kami</h1>
-            <p class="font-normal">Konsultasikan kebutuhan digitalisasi perusahaan Anda dengan Diggity.
-                Segera bangun platform digital bisnis Anda bersama kami.</p>
+    <main class="container max-w-screen-md mx-auto font-semibold text-center lg:space-y-6 xl:space-y-12">
+        @session('message')
+            <x-alert :message="$value" />
+        @endsession
+        <div class="lg:space-y-3 xl:space-y-6">
+            <h1 class="xl:text-4xl lg:text-2xl">Hubungi Kami</h1>
+            <p class="font-normal lg:text-sm xl:text-base">
+                Konsultasikan kebutuhan digitalisasi perusahaan Anda dengan Diggity.
+                Segera bangun platform digital bisnis Anda bersama kami.
+            </p>
         </div>
-        <div class="space-y-6">
-            <h3 class="text-2xl">Tahap {{ $page }} dari 3</h3>
-            <p>Bagaimana cara kami menghubungi Anda?</p>
+        <div class="lg:space-y-3 xl:space-y-6">
+            <h3 class="lg:text-lg xl:text-2xl">Tahap {{ $page }} dari 3</h3>
+            <p class="lg:text-sm xl:text-base">Bagaimana cara kami menghubungi Anda?</p>
         </div>
-        <form wire:submit="store" class="space-y-12">
+        <form wire:submit="store" class="lg:space-y-6 xl:space-y-12 lg:text-sm xl:text-base">
             @switch($page)
                 {{-- First Form --}}
                 @case(1)
@@ -243,6 +250,7 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
                         </x-select-input>
                         <x-input-error :messages="$errors->get('thirdForm.region')" />
                     </div>
+                    {{-- Regency --}}
                     <div class="flex flex-col gap-3">
                         <label for="regency" class="self-start">Pilih Kabupaten/Kota</label>
                         <x-select-input id="regency" wire:model.live="thirdForm.regency"

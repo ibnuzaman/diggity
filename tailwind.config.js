@@ -31,7 +31,6 @@ export default {
                 'accent': '#00BE5F',
             },
         },
-
         plugins: [
             forms,
             require('flowbite/plugin'),

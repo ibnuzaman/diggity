@@ -17,10 +17,12 @@ new class extends Component {
     isActive(navlink) { return navlink ? 'md:border-primary' : 'md:border-transparent'; },
 }" class="border-gray-200 bg-ghost-white dark:border-gray-600 dark:bg-gray-900">
     <div class="bg-white">
-        <div class="container flex items-center justify-between p-4 mx-auto">
-            <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="{{ asset('asset/logo.png') }}" class="size-14" alt="Diggity Logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Diggity</span>
+        <div class="container flex items-center justify-between mx-auto lg:p-2 xl:p-4">
+            <a href="{{ route('home') }}" class="flex items-center space-x-3">
+                <img src="{{ asset('asset/logo.png') }}" class="lg:size-10 xl:size-14" alt="Diggity Logo" />
+                <span class="self-center font-semibold lg:text-lg xl:text-2xl whitespace-nowrap dark:text-white">
+                    Diggity
+                </span>
             </a>
             <button type="button"
                 class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -33,7 +35,7 @@ new class extends Component {
             </button>
             <div class="items-center justify-between hidden w-full font-medium md:flex md:w-auto md:order-1">
                 <ul
-                    class="flex flex-col h-full gap-3 p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="flex flex-col h-full gap-3 p-4 mt-4 border border-gray-100 rounded-lg md:items-center bg-gray-50 md:p-0 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
                         <x-nav-link x-on:click="services=!services" x-bind:class="isActive(services)">
                             Layanan

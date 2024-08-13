@@ -6,13 +6,14 @@ use Livewire\Attributes\Layout;
 new #[Layout('layouts.app')] class extends Component {}; ?>
 
 <div>
-    <x-carousel carouselNum="1" />
+    <x-carousel carouselNum="1" class="lg:py-24 xl:py-36" />
 
     {{-- Layanan --}}
-    <div class="py-24 bg-secondary">
-        <div class="container mx-auto space-y-12 text-center">
-            <h2 class="text-3xl font-semibold">Layanan Kami</h2>
-            <p>Kami memotivasi diri kami untuk mengaplikasikan kreativitas dalam setiap proyek, termasuk dalam
+    <div class="lg:py-12 xl:py-24 bg-secondary">
+        <div class="container mx-auto text-center lg:space-y-6 xl:space-y-12">
+            <h2 class="font-semibold lg:text-xl xl:text-3xl">Layanan Kami</h2>
+            <p class="lg:text-sm xl:text-base">Kami memotivasi diri kami untuk mengaplikasikan kreativitas dalam setiap
+                proyek, termasuk dalam
                 optimalisasi
                 penggunaan anggaran dan waktu</p>
             {{-- Card --}}
@@ -30,7 +31,7 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                     <x-slot:description>
                         Optimalkan mobilitas dan reputasi merek bisnis Anda melalui pengembangan aplikasi mobile
                         (Android & iOS). Capai lebih banyak pelanggan dan persiapkan bisnis Anda untuk bersaing di era
-                        digital saat ini
+                        digital saat ini.
                     </x-slot:description>
                 </x-item-service-card>
                 <x-item-service-card>
@@ -42,15 +43,18 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
                     </x-slot:description>
                 </x-item-service-card>
             </div>
-            <a href="#" class="block font-medium text-primary text-end">Lihat Semua Layanan</a>
+            <a href="#"
+                class="block font-medium ms-auto w-fit text-primary hover:underline lg:text-sm xl:text-base">
+                Lihat Semua Layanan</a>
         </div>
     </div>
 
     {{-- Model Kerja Sama --}}
-    <div class="py-36">
-        <div class="container mx-auto space-y-12 text-center">
-            <h2 class="text-3xl font-semibold">Model Kerja Sama</h2>
-            <p>Sesuaikanlah model proyek dengan kebutuhan yang Anda miliki untuk mencapai hasil yang optimal.</p>
+    <div class="lg:py-24 xl:py-36">
+        <div class="container mx-auto text-center lg:space-y-6 xl:space-y-12">
+            <h2 class="font-semibold lg:text-xl xl:text-3xl">Model Kerja Sama</h2>
+            <p class="lg:text-sm xl:text-base">
+                Sesuaikanlah model proyek dengan kebutuhan yang Anda miliki untuk mencapai hasil yang optimal.</p>
             <div class="grid grid-cols-3 gap-7">
                 <x-item-collaboration-type :href="route('project-based')" title="Project Based"
                     description="Tenaga kerja yang dikhususkan untuk menangani proyek Anda." :benefits="[
@@ -82,51 +86,50 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- Portfolio --}}
-    <x-carousel carouselNum="2" bg="bg-secondary" class="pt-24 space-y-24 text-center">
-        <div class="space-y-12">
-            <h2 class="text-3xl font-semibold">Portofolio</h2>
-            <p class="mx-72">
+    <x-carousel carouselNum="2" bg="bg-secondary" class="text-center xl:space-y-24 lg:space-y-12 lg:py-12 xl:py-36">
+        <div class="lg:space-y-6 xl:space-y-12">
+            <h2 class="font-semibold lg:text-xl xl:text-3xl">Portofolio</h2>
+            <p class="mx-72 lg:text-sm xl:text-base">
                 Dalam beberapa tahun terakhir, pengalaman kami telah membantu klien memulai langkahnya
-                dalam dunia digital. Lihatlah beberapa karya terbaik yang telah kami hasilkan.</p>
+                dalam dunia digital. Lihatlah beberapa karya terbaik yang telah kami hasilkan.
+            </p>
         </div>
     </x-carousel>
 
     {{-- Tentang Kami --}}
-    <div class="py-24">
-        <div class="container grid grid-cols-2 mx-auto gap-52">
-            <div class="space-y-12">
-                <h1 class="text-4xl font-semibold">Bergabunglah dengan Kami: Peluang Karier di Dunia IT</h1>
-                <div class="space-y-6">
-                    <p> Kami bukan hanya sekedar perusahaan perangkat lunak saja, tapi juga sebuah keluarga yang
-                        saling
-                        mendukung
-                        dan
-                        menginspirasi. Berbasis di Yogyakarta, Indonesia, kami membangun lingkungan kerja yang penuh
-                        semangat
-                        dan
-                        kolaboratif. Ini adalah kesempatan Anda untuk bergabung dengan tim profesional kami. Kami
-                        mengundang
-                        Anda
-                        untuk berbagi keterampilan dan pengalaman Anda yang berharga.</p>
-                    <p>
+    {{-- <div class="lg:py-24 xl:py-36">
+        <div class="container grid grid-cols-2 mx-auto lg:gap-20 xl:gap-52">
+            <div class="lg:space-y-6 xl:space-y-12">
+                <h1 class="font-semibold lg:text-2xl xl:text-4xl">
+                    Bergabunglah dengan Kami: Peluang Karier di Dunia IT
+                </h1>
+                <div class="xl:space-y-6 lg:space-y-3">
+                    <p class="lg:text-sm xl:text-base">
+                        Kami bukan hanya sekedar perusahaan perangkat lunak saja, tapi juga sebuah keluarga yang
+                        saling mendukung dan menginspirasi. Berbasis di Yogyakarta, Indonesia, kami membangun lingkungan
+                        kerja yang penuh semangat dan kolaboratif. Ini adalah kesempatan Anda untuk bergabung dengan tim
+                        profesional kami. Kami mengundang Anda untuk berbagi keterampilan dan pengalaman Anda yang
+                        berharga.
+                    </p>
+                    <p class="lg:text-sm xl:text-base">
                         Sekarang, saatnya untuk beraksi! Kirimkan lamaran Anda sekarang dan mulailah petualangan karier
-                        Anda
-                        dengan
-                        Diggity. Ayo, mari jadikan mimpi Anda menjadi kenyataan bersama kami!
+                        Anda dengan Diggity. Ayo, mari jadikan mimpi Anda menjadi kenyataan bersama kami!
                     </p>
                 </div>
                 <x-outline-button>Pelajari Selengkapnya</x-outline-button>
             </div>
-            <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="image" class="rounded-xl">
+            <img src="{{ asset('asset/images/carousels/carousel1.jpeg') }}" alt="image"
+                class="self-center rounded-xl">
         </div>
-    </div>
+    </div> --}}
 
     {{-- Alasan Memakai Layanan --}}
-    <div class="py-36">
-        <div class="container mx-auto space-y-12 text-center">
-            <h2 class="text-3xl font-semibold">Mengapa Memakai Layanan Diggity</h2>
-            <p>Layanan Diggity Cocok untuk Memenuhi Kebutuhan Digitalisasi Bisnis Anda dengan Tepat</p>
-            <div class="grid grid-cols-3 text-start gap-x-7 gap-y-12">
+    <div class="lg:py-12 xl:py-24">
+        <div class="container mx-auto text-center lg:space-y-6 xl:space-y-12">
+            <h2 class="font-semibold lg:text-xl xl:text-3xl">Mengapa Memakai Layanan Diggity</h2>
+            <p class="lg:text-sm xl:text-base">Layanan Diggity Cocok untuk Memenuhi Kebutuhan Digitalisasi Bisnis Anda
+                dengan Tepat</p>
+            <div class="grid grid-cols-3 text-start lg:gap-x-4 xl:gap-x-7 lg:gap-y-6 xl:gap-y-12">
                 <x-item-service-reason>
                     <x-slot:num>1</x-slot:num>
                     <x-slot:title>Inovasi Digital dengan Standar Internasional</x-slot:title>
@@ -172,5 +175,5 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     </div>
 
     {{-- Footer --}}
-    <x-footer></x-footer>
+    <x-footer />
 </div>
