@@ -1,8 +1,8 @@
 @props(['num'])
 
-<div class="p-6 space-y-6 bg-white rounded shadow-card-secondary">
+<div class="bg-white rounded lg:space-y-4 xl:space-y-6 lg:p-3 xl:p-6 shadow-card-secondary lg:text-sm xl:text-base">
     <img src="{{ asset("asset/images/portfolio/item$num-portfolio.png") }}" alt="item portfolio"
-        class="object-cover w-full h-52 rounded-xl">
+        class="object-cover w-full lg:h-40 xl:h-52 rounded-xl">
     <h4 class="font-semibold">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </h4>

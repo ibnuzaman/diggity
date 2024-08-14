@@ -21,7 +21,7 @@
 
         <div class="fixed z-50 flex flex-col items-center lg:gap-6 xl:gap-12 lg:right-16 xl:right-24 bottom-24">
             <div id="goToTopButton" class="p-2 border-4 border-white rounded-full hover:cursor-pointer">
-                <x-svgs.arrow class="text-white -rotate-90 size-8"></x-svgs.arrow>
+                <x-svgs.arrow class="text-white -rotate-90 lg:size-8 xl:size-8"></x-svgs.arrow>
             </div>
             <img src="{{ asset('asset/icons/whatsapp.png') }}" alt="whatsapp logo" class="size-14">
         </div>

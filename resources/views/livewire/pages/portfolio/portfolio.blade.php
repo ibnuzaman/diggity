@@ -3,14 +3,12 @@
 use Livewire\Volt\Component;
 use Livewire\Attributes\Layout;
 
-new #[Layout('layouts.app')] class extends Component {
-    public string $var = 'variable';
-}; ?>
+new #[Layout('layouts.app')] class extends Component {}; ?>
 
 <div>
     {{-- Header --}}
-    <header class="py-24 bg-secondary">
-        <div class="container mx-auto space-y-12">
+    <header class="lg:py-12 xl:py-24 bg-secondary">
+        <div class="container mx-auto lg:space-y-6 xl:space-y-12">
             <x-breadcumb>
                 <x-breadcumb-link>
                     Portofolio
@@ -27,17 +25,20 @@ new #[Layout('layouts.app')] class extends Component {
             </x-hero-header>
         </div>
     </header>
-    <div class="py-36">
+
+    {{-- Portfolios --}}
+    <div class="lg:py-24 xl:py-36">
         <div class="container mx-auto">
-            <div class="grid grid-cols-3 gap-x-7 gap-y-12">
+            <div class="grid grid-cols-3 lg:gap-x-3.5 xl:gap-x-7 lg:gap-y-8 xl:gap-y-12">
                 @for ($i = 1; $i <= 6; $i++)
                     <x-item-portfolio :num="$i" :href="route('detail-portfolio', ['id' => 0])" />
                 @endfor
             </div>
         </div>
     </div>
+
     {{-- Hubungi Kami --}}
-    <div class="py-24 bg-secondary">
+    <div class="lg:py-12 xl:py-24 bg-secondary">
         <div class="container mx-auto">
             <x-hero-header :src="asset('asset/images/header-contact-us.jpeg')">
                 <x-slot:type>
@@ -51,13 +52,15 @@ new #[Layout('layouts.app')] class extends Component {
             </x-hero-header>
         </div>
     </div>
-    {{-- Bottom Navigation --}}
-    <div class="container py-5 mx-auto">
+
+    {{-- Bottom Breadcumb --}}
+    <div class="container mx-auto lg:py-3 xl:py-5">
         <x-breadcumb>
             <x-breadcumb-link>
                 Portofolio
             </x-breadcumb-link>
         </x-breadcumb>
     </div>
+
     <x-footer />
 </div>
