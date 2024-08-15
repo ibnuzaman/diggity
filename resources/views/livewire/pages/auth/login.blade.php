@@ -67,9 +67,12 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
-            <x-primary-button class="ms-3">
-                {{ __('Google') }}
-            </x-primary-button>
         </div>
+        <div>
+            <a href="/auth/google/redirect" class="text-white">
+                Login with google
+            </a>
+        </div>
+
     </form>
 </div>
