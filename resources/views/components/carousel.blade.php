@@ -1,6 +1,4 @@
-@props(['bg' => 'bg-transparent'])
-
-<div id="default-carousel-{{ $carouselNum }}" {{ $attributes->merge(['class' => "w-full h-fit $bg"]) }}>
+<div id="default-carousel-{{ $carouselNum }}" class="w-full h-fit">
     {{ $slot }}
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-lg lg:mb-12 xl:mb-24 md:h-96 text-start">

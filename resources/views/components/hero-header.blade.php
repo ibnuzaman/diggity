@@ -1,9 +1,9 @@
 <div class="container grid grid-cols-2 gap-24 mx-auto">
     <div class="flex flex-col justify-center lg:gap-8 xl:gap-12">
-        <h1 class="font-semibold lg:text-2xl xl:text-4xl">
+        <h1 class="font-semibold heading-one">
             {{ $type }}
         </h1>
-        <p class="lg:text-sm xl:text-base">{{ $description }}</p>
+        <p class="paragraph">{{ $description }}</p>
         <a href="{{ route('contact-us') }}" class="w-fit" wire:navigate>
             <x-button>Hubungi Kami</x-button>
         </a>

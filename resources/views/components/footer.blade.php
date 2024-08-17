@@ -4,11 +4,11 @@
             <div class="flex items-center lg:gap-4 xl:gap-6">
                 <img src="{{ asset('asset/logo.png') }}" alt="logo" class="lg:size-16 xl:size-24">
                 <div class="lg:space-y-2 xl:space-y-3">
-                    <h1 class="font-bold lg:text-2xl xl:text-4xl">Diggity</h1>
-                    <p class="lg:text-sm xl:text-lg">Craft Your Digital Dream</p>
+                    <h1 class="heading-one">Diggity</h1>
+                    <p class="paragraph">Craft Your Digital Dream</p>
                 </div>
             </div>
-            <div class="font-medium lg:space-y-3 xl:space-y-6 lg:text-sm xl:text-lg">
+            <div class="font-medium lg:space-y-3 xl:space-y-6 paragraph">
                 <p>Minggiran, Sendangtirto, Kec. Berbah, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55573</p>
                 <p>+62 878-4305-2780</p>
                 <p>info@diggity.co.id</p>
@@ -27,33 +27,33 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-y-12">
-            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 lg:text-sm xl:text-base">
-                <h2 class="lg:text-xl xl:text-3xl">Layanan</h2>
-                <p class="lg:text-sm xl:text-base">Layanan Utama</p>
+            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 paragraph">
+                <h2 class="heading-two">Layanan</h2>
+                <p>Layanan Utama</p>
                 <p>Model Kerja Sama</p>
                 <p>Portofolio</p>
             </div>
-            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 lg:text-sm xl:text-base">
-                <h2 class="lg:text-xl xl:text-3xl">Produk</h2>
+            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 paragraph">
+                <h2 class="heading-two">Produk</h2>
                 <p>Produk Utama</p>
                 <p>Harga</p>
             </div>
-            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 lg:text-sm xl:text-base">
-                <h2 class="lg:text-xl xl:text-3xl">Kelas</h2>
+            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 paragraph">
+                <h2 class="heading-two">Kelas</h2>
                 <p>Kelas Utama</p>
                 <p>Alur Belajar</p>
                 <p>Bootcamp</p>
                 <p>Webinar</p>
                 <p>Universitas dan Perusahaan</p>
             </div>
-            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 lg:text-sm xl:text-base">
-                <h2 class="lg:text-xl xl:text-3xl">Panduan</h2>
+            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 paragraph">
+                <h2 class="heading-two">Panduan</h2>
                 <p>Panduan</p>
                 <p>Kolaborasi</p>
                 <p>Partner Komersial</p>
             </div>
-            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 lg:text-sm xl:text-base">
-                <h2 class="lg:text-xl xl:text-3xl">Tentang</h2>
+            <div class="text-lg font-medium lg:space-y-3 xl:space-y-6 paragraph">
+                <h2 class="heading-two">Tentang</h2>
                 <p>Tentang Diggity</p>
                 <p>Mengapa Diggity</p>
                 <p>Karir</p>
@@ -61,7 +61,7 @@
         </div>
     </div>
     <div
-        class="flex justify-between font-semibold text-white lg:text-sm xl:text-lg lg:py-6 xl:py-12 lg:px-12 xl:px-24 bg-oxford-blue">
+        class="flex justify-between font-semibold text-white paragraph lg:py-6 xl:py-12 lg:px-12 xl:px-24 bg-oxford-blue">
         <div class="flex lg:gap-3 xl:gap-6">
             <p>&copy;</p>
             <p>Copyright 2024 CV Sinergi Cita Digital</p>

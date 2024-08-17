@@ -5,5 +5,5 @@
 @endphp
 
 <textarea
-    {{ $attributes->merge(['class' => "block p-2.5 w-full text-base font-normal text-gray-900 bg-white rounded-md border active:outline-primary focus:outline-primary $border"]) }}
+    {{ $attributes->merge(['class' => "block p-2.5 w-full paragraph font-normal text-gray-900 bg-white rounded-md border active:outline-primary focus:outline-primary $border"]) }}
     rows="8"></textarea>

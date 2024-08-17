@@ -1,7 +1,7 @@
 <?php
 
 use Livewire\Volt\Component;
-use Livewire\Attributes\{Layout, Title};
+use Livewire\Attributes\Layout;
 use App\Models\Budget;
 use App\Models\Collaboration;
 use App\Models\Regency;
@@ -13,7 +13,7 @@ use App\Livewire\Forms\ContactUsForm\FirstForm;
 use App\Livewire\Forms\ContactUsForm\SecondForm;
 use App\Livewire\Forms\ContactUsForm\ThirdForm;
 
-new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
+new #[Layout('layouts.app')] class extends Component {
     public int $page = 1;
     public FirstForm $firstForm;
     public SecondForm $secondForm;
@@ -75,7 +75,6 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
             'regency_id' => $this->thirdForm->regency,
         ]);
 
-        // return back()->with('message', 'Berhasil Mengirim Pesan');
         session()->flash('message', 'Berhasil Mengirim Pesan');
         $this->redirectRoute('contact-us');
     }
@@ -97,17 +96,17 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
             <x-alert :message="$value" />
         @endsession
         <div class="lg:space-y-3 xl:space-y-6">
-            <h1 class="xl:text-4xl lg:text-2xl">Hubungi Kami</h1>
-            <p class="font-normal lg:text-sm xl:text-base">
+            <h1 class="heading-one">Hubungi Kami</h1>
+            <p class="font-normal paragraph">
                 Konsultasikan kebutuhan digitalisasi perusahaan Anda dengan Diggity.
                 Segera bangun platform digital bisnis Anda bersama kami.
             </p>
         </div>
         <div class="lg:space-y-3 xl:space-y-6">
-            <h3 class="lg:text-lg xl:text-2xl">Tahap {{ $page }} dari 3</h3>
-            <p class="lg:text-sm xl:text-base">Bagaimana cara kami menghubungi Anda?</p>
+            <h3 class="heading-three">Tahap {{ $page }} dari 3</h3>
+            <p class="paragraph">Bagaimana cara kami menghubungi Anda?</p>
         </div>
-        <form wire:submit="store" class="lg:space-y-6 xl:space-y-12 lg:text-sm xl:text-base">
+        <form wire:submit="store" class="lg:space-y-6 xl:space-y-12 paragraph">
             @switch($page)
                 {{-- First Form --}}
                 @case(1)
@@ -269,6 +268,7 @@ new #[Title('Contact Us')] #[Layout('layouts.app')] class extends Component {
                 @break
 
                 @default
+                    <p>Page Not Found</p>
             @endswitch
         </form>
     </main>

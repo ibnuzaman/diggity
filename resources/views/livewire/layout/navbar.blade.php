@@ -20,7 +20,7 @@ new class extends Component {
         <div class="container flex items-center justify-between mx-auto lg:p-2 xl:p-4">
             <a href="{{ route('home') }}" class="flex items-center space-x-3">
                 <img src="{{ asset('asset/logo.png') }}" class="lg:size-10 xl:size-14" alt="Diggity Logo" />
-                <span class="self-center font-semibold lg:text-lg xl:text-2xl whitespace-nowrap dark:text-white">
+                <span class="self-center font-semibold heading-two whitespace-nowrap dark:text-white">
                     Diggity
                 </span>
             </a>

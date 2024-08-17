@@ -1,4 +1,4 @@
-<div class="space-y-6 bg-white rounded-md lg:p-3.5 xl:p-6 shadow-card lg:text-sm xl:text-base hover:cursor-pointer"
+<div class="space-y-6 bg-white rounded-md lg:p-3.5 xl:p-6 shadow-card paragraph hover:cursor-pointer"
     x-data="{ open: false }">
     <div class="flex items-center justify-between gap-3" x-on:click="open=!open">
         <h5 class="font-medium">{{ $question }}</h5>
