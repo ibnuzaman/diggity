@@ -19,5 +19,6 @@ Volt::route('/on-demand', 'pages.collaborationtype.on-demand')->name('on-demand'
 Volt::route('/portfolio', 'pages.portfolio.portfolio')->name('portfolio');
 Volt::route('/portfolio/{id}', 'pages.portfolio.detail-portfolio')->name('detail-portfolio');
 Volt::route('/service', 'pages.services.service')->name('service');
+Volt::route('/service/{id}', 'pages.services.service-detail')->name('service-detail');
 
 require __DIR__ . '/auth.php';

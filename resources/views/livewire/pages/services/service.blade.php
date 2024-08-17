@@ -27,14 +27,16 @@ new #[Layout('layouts.app')] class extends Component {}; ?>
     {{-- Our Services --}}
     <x-wrapper>
         <h2 class="heading-two lg:mb-12 xl:mb-24">Layanan yang Kami Sediakan</h2>
-        <x-item-our-service :src="asset('asset/images/services/pages/icon-website-development.png')">
-            <x-slot:title>Website Development</x-slot:title>
-            <x-slot:description>
-                Dengan bantuan tim developer yang berpengalaman, kami selalu memperhitungkan
-                kesesuaian teknologi dengan kebutuhan masing-masing bisnis. Kami memastikan bahwa situs web yang
-                kami bangun tidak hanya cepat, tetapi juga ramah terhadap SEO dan user-friendly.
-            </x-slot:description>
-        </x-item-our-service>
+        <a href="{{ route('service-detail', ['id' => 0]) }}" wire:navigate>
+            <x-item-our-service :src="asset('asset/images/services/pages/icon-website-development.png')">
+                <x-slot:title>Website Development</x-slot:title>
+                <x-slot:description>
+                    Dengan bantuan tim developer yang berpengalaman, kami selalu memperhitungkan
+                    kesesuaian teknologi dengan kebutuhan masing-masing bisnis. Kami memastikan bahwa situs web yang
+                    kami bangun tidak hanya cepat, tetapi juga ramah terhadap SEO dan user-friendly.
+                </x-slot:description>
+            </x-item-our-service>
+        </a>
         <x-item-our-service :src="asset('asset/images/services/pages/icon-mobile-app-development.png')">
             <x-slot:title>Mobile App Development</x-slot:title>
             <x-slot:description>
