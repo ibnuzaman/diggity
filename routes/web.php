@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::view('/', 'welcome');
+use Livewire\Volt\Volt;
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -12,4 +11,14 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+Volt::route('/', 'pages.home.home')->name('home');
+Volt::route('/contactus', 'pages.contactus.contact-us')->name('contact-us');
+Volt::route('/project-based', 'pages.collaborationtype.project-based')->name('project-based');
+Volt::route('/dedicated-team', 'pages.collaborationtype.dedicated-team')->name('dedicated-team');
+Volt::route('/on-demand', 'pages.collaborationtype.on-demand')->name('on-demand');
+Volt::route('/portfolio', 'pages.portfolio.portfolio')->name('portfolio');
+Volt::route('/portfolio/{id}', 'pages.portfolio.detail-portfolio')->name('detail-portfolio');
+Volt::route('/service', 'pages.services.service')->name('service');
+Volt::route('/service/{id}', 'pages.services.service-detail')->name('service-detail');
+
+require __DIR__ . '/auth.php';

@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .paragraph {
+        @apply lg:text-sm xl:text-base;
+    }
+
+    .heading-one {
+        @apply font-bold lg:text-2xl xl:text-4xl;
+    }
+
+    .heading-two {
+        @apply font-semibold lg:text-xl xl:text-3xl;
+    }
+
+    .heading-three {
+        @apply font-semibold lg:text-lg xl:text-2xl;
+    }
+    .heading-four {
+        @apply font-semibold lg:text-base xl:text-xl;
+    }
+}
