@@ -52,6 +52,7 @@ Route::middleware(['visitors'])->group(function () {
         Route::get('/weeklyVisitors', [VisitorController::class, 'weeklyVisitors']);
         Route::get('/visitors', [VisitorController::class, 'visitors']);
         Route::get('/monthlyVisitors', [VisitorController::class, 'monthlyVisitors']);
+        Route::get('/yearlyVisitors', [VisitorController::class, 'yearlyVisitors']);
     });
 });
 

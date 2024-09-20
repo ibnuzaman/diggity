@@ -40,4 +40,12 @@ class VisitorController extends Controller
             ->sum('visits');
         return response()->json(['monthlyVisitorsTraffic' => $monthlyVisitors]);
     }
+
+    public function yearlyVisitors()
+    {
+        $currentYear = now()->year;
+        $yearlyVisitors = Traffic::whereYear('created_at', $currentYear)
+            ->sum('visits');
+        return response()->json(['yearlyVisitorsTraffic' => $yearlyVisitors]);
+    }
 }
