@@ -38,6 +38,14 @@ Route::get('/up', function () {
  * @controller VisitorController
  * @method monthlyVisitors
  */
+
+/* Tracker visitors diakses lewat middleware as [visitors]
+    - weeklyVisitors
+    - dailyVisitors
+    - visitors
+    - monthlyVisitors
+    Add middleware [visitors] to the tracker visitor by IP
+ */
 Route::middleware(['visitors'])->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('/dailyVisitors', [VisitorController::class, 'dailyVisitors']);
