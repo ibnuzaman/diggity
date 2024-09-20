@@ -13,11 +13,10 @@ class Traffic extends Model
     protected static function boot()
     {
         parent::boot();
-
-        static::saving(function ($traffic) {
-            if ($traffic->visits) {
-                $traffic->visits++;
-            }
-        });
+        // static::saving(function ($traffic) {
+        //     if ($traffic->visits) {
+        //         $traffic->visits++;
+        //     }
+        // });
     }
 }

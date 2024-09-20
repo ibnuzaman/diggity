@@ -29,10 +29,8 @@ Route::get('/auth/google/callback', [ProviderController::class, 'callback']);
 
 
 Route::middleware(['visitors'])->group(function () {
-    Route::get('/visitors', [VisitorController::class, 'index']);
-    Route::get('/test', function () {
-        return "test";
-    });
+    Route::get('/weeklyVisitors', [VisitorController::class, 'weeklyVisitors']);
+    Route::get('/dailyVisitors', [VisitorController::class, 'dailyVisitor']);
 });
 
 

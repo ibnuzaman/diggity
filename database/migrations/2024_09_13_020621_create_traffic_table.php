@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('traffic', function (Blueprint $table) {
             $table->id();
-            $table->string('visitor')->default(0);
-            $table->integer('visits')->default(1);
+            $table->string('visitor');
+            $table->integer('visits');
             $table->timestamps();
         });
     }

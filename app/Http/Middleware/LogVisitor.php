@@ -29,7 +29,7 @@ class LogVisitor
         if ($traffic) {
             $traffic->visits++;
         } else {
-            $traffic = new Traffic(['visitor' => $visitor]);
+            $traffic = new Traffic(['visitor' => $visitor, 'visits' => 1]);
             $traffic->save();
         }
         return $next($request);
