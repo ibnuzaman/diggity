@@ -11,12 +11,9 @@ class VisitorController extends Controller
     public function index(Request $request)
     {
         $date = now()->format('Y-m-d');
-
         $dailyVisitors = Traffic::whereDate('created_at', $date)
             ->sum('visits');
-
         dd($dailyVisitors);
-
-        return view('visitors', compact('dailyVisitors'));
+        // return view('visitors', compact('dailyVisitors'));
     }
 }
