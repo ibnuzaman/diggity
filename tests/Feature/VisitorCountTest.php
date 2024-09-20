@@ -25,16 +25,11 @@ class VisitorCountTest extends TestCase
 
     public function testWeeklyVisitors()
     {
-
         for ($i = 0; $i < 7; $i++) {
             $date = Carbon::now()->subDays($i)->format('Y-m-d');
             Traffic::factory()->create(['created_at' => $date, 'visits' => 5]);
         }
-
-
         $response = $this->get('/weeklyVisitors');
-
-
         $response->assertStatus(200);
         $weeklyTraffic = $response->json('weeklyTraffic');
         $this->assertCount(7, $weeklyTraffic);
@@ -42,5 +37,15 @@ class VisitorCountTest extends TestCase
         foreach ($weeklyTraffic as $dayTraffic) {
             $this->assertEquals(5, $dayTraffic['visits']);
         }
+    }
+
+    public function testMonthlyVisitors()
+    {
+        $currentMonth = now()->month;
+        Traffic::factory()->create(['created_at' => now(), 'visits' => 5]);
+        $response = $this->get('/monthlyVisitors');
+        // $response->assertStatus(200);
+        $monthlyVisitors = $response->json('monthlyVisitors');
+        $this->assertEquals(5, $monthlyVisitors);
     }
 }

@@ -21,9 +21,9 @@ class LogVisitor
     {
         // test ip (hard code)
         // $visitor = "129.1.4.11";
-        $visitor = "129.1.4.12";
+        // $visitor = "129.1.4.12";
         // $visitor = "129.1.4.13";
-        // $visitor = $request->ip();
+        $visitor = $request->ip();
         $traffic = Traffic::where('visitor', $visitor)->first();
 
         if ($traffic) {
