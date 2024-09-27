@@ -10,9 +10,15 @@ class VisitorController extends Controller
 {
     public function dailyVisitors()
     {
+        $ip = request()->ip();
         $date = now()->format('Y-m-d');
         $dailyVisitors = Traffic::whereDate('created_at', $date)
             ->sum('visits');
+        if ($dailyVisitors == 0) {
+            $traffic = new Traffic(['visitor' => $ip, 'visits' => 1, 'created_at' => now(), 'updated_at' => now()]);
+            $traffic->save();
+        }
+
         return response()->json(['dailyVisitorsTraffic' => $dailyVisitors]);
     }
 
