@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use Illuminate\Validation\ValidationException;
 
 class ReviewController extends Controller
 {
+
 
     public function index()
     {
@@ -17,34 +19,30 @@ class ReviewController extends Controller
 
     public function store(Request $request, $course_id)
     {
-        $data = $request->validate([
-            'rating' => 'required|integer|between:1,5',
-            'review' => 'required|string',
-        ]);
-
         try {
+            $validatedData = $request->validate([
+                'user_id' => 'required|integer',
+                'course_id' => 'required|integer',
+                'review' => 'required|string',
+                'rating' => 'required|integer|between:1,5',
+            ]);
+
             $review = new Review();
             $review->course_id = $course_id;
-            $review->rating = $data['rating'];
-            $review->review = $data['review'];
-            // $review->user_id = auth()->id();
-            // test user_id
-            $review->user_id = 1;
-            $review->save();
+            $review->review = $validatedData['review'];
+            $review->rating = $validatedData['rating'];
+            // $review->user_id = auth()->id();            
+            $review->user_id = 1; // test user_id
 
+            $review->save();
             return response()->json([
                 'message' => 'Review created successfully',
                 'review' => $review,
             ]);
-        } catch (\Exception $e) {
-            if ($request->expectsJson()) {
-                return response()->json([
-                    'message' => 'Failed to create review',
-                    'error' => $e->getMessage(),
-                ], 500);
-            } else {
-                return redirect()->back()->withErrors(['error' => 'Failed to create review']);
-            }
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors(),
+            ], 422);
         }
     }
 }
