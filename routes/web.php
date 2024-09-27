@@ -10,6 +10,8 @@ use App\Models\Visitor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CourseController;
 
 
 Route::view('/', 'welcome');
@@ -24,6 +26,10 @@ Route::view('profile', 'profile')
 
 Route::get('/auth/google/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/google/callback', [ProviderController::class, 'callback']);
+
+
+
+
 
 
 
