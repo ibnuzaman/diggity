@@ -21,8 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
-        // 'google_token',
-        // 'google_refresh_token',
+        'google_token',
+        'google_refresh_token',
     ];
 
     /**
@@ -46,5 +46,10 @@ class User extends Authenticatable
             // 'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }
