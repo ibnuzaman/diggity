@@ -22,7 +22,6 @@ class StoreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'slug' => 'required|string|unique:courses,slug|max:100',
             'name' => 'required|string|max:100',
             'price' => 'required|numeric|min:0',
             'level' => 'required|in:beginner,intermediate,advanced',

@@ -58,8 +58,15 @@ Route::middleware(['visitors'])->group(function () {
     });
 });
 
+Route::prefix('v1')->group(function () {
+    Route::get('/reviews/latest', [ReviewController::class, 'latest']);
+    Route::get('/reviews', [ReviewController::class, 'index']);
+    Route::post('/reviews/{course_id}', [ReviewController::class, 'store']);
+    Route::get('reviews/higherRating', [ReviewController::class, 'higherRating']);
+    Route::get('reviews/lowerRating', [ReviewController::class, 'lowerRating']);
+});
+
 Route::post('reviews/{course_id}', [ReviewController::class, 'store']);
-// Route::get('reviews/{course}', [ReviewController::class, 'index']);
 Route::get('reviews/', [ReviewController::class, 'index']);
 
 Route::post('/courses', [CourseController::class, 'store']);

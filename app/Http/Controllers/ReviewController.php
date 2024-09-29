@@ -13,7 +13,28 @@ class ReviewController extends Controller
     public function index()
     {
         return response()->json([
-            'data' => Review::all(),
+            'data' => Review::paginate(4),
+        ]);
+    }
+
+    public function latest()
+    {
+        return response()->json([
+            'data' => Review::latest()->paginate(4),
+        ]);
+    }
+
+    public function higherRating()
+    {
+        return response()->json([
+            'data' => Review::where('rating', '>', 3)->paginate(4),
+        ]);
+    }
+
+    public function lowerRating()
+    {
+        return response()->json([
+            'data' => Review::where('rating', '<', 3)->paginate(4),
         ]);
     }
 
@@ -21,8 +42,6 @@ class ReviewController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'user_id' => 'required|integer',
-                'course_id' => 'required|integer',
                 'review' => 'required|string',
                 'rating' => 'required|integer|between:1,5',
             ]);
@@ -31,7 +50,7 @@ class ReviewController extends Controller
             $review->course_id = $course_id;
             $review->review = $validatedData['review'];
             $review->rating = $validatedData['rating'];
-            // $review->user_id = auth()->id();            
+            // $review->user_id = auth()->id();
             $review->user_id = 1; // test user_id
 
             $review->save();
