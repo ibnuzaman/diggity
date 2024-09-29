@@ -15,38 +15,19 @@ Route::get('/up', function () {
 });
 
 /**
- * API Routes for Visitor Management
+ * API Routes for version 1.
  *
- * This group of routes is protected by the 'visitors' middleware and is 
- * prefixed with 'v1'. It includes the following endpoints:
+ * Prefix: v1
  *
- * @route GET /api/v1/weeklyVisitors
- * @description Fetches the weekly visitors data.
- * @controller VisitorController
- * @method weeklyVisitors
+ * Routes:
+ * - GET /dailyVisitors: Fetch the number of daily visitors.
+ * - GET /weeklyVisitors: Fetch the number of weekly visitors.
+ * - GET /visitors: Fetch the number of visitors.
+ * - GET /monthlyVisitors: Fetch the number of monthly visitors.
+ * - GET /yearlyVisitors: Fetch the number of yearly visitors.
  *
- * @route GET /api/v1/dailyVisitors
- * @description Fetches the daily visitors data.
- * @controller VisitorController
- * @method dailyVisitors
- *
- * @route GET /api/v1/visitors
- * @description Fetches the general visitors data.
- * @controller VisitorController
- * @method visitors
- *
- * @route GET /api/v1/monthlyVisitors
- * @description Fetches the monthly visitors data.
- * @controller VisitorController
- * @method monthlyVisitors
- */
-
-/* Tracker visitors diakses lewat middleware as [visitors]
-    - weeklyVisitors
-    - dailyVisitors
-    - visitors
-    - monthlyVisitors
-    Add middleware [visitors] to the tracker visitor by IP
+ * Controllers:
+ * - VisitorController: Handles all visitor-related actions.
  */
 Route::middleware(['visitors'])->group(function () {
     Route::prefix('v1')->group(function () {
@@ -58,6 +39,23 @@ Route::middleware(['visitors'])->group(function () {
     });
 });
 
+
+
+/**
+ * API Routes for version 1.
+ *
+ * Prefix: v1
+ *
+ * Routes:
+ * - GET /reviews/latest: Fetch the latest reviews.
+ * - GET /reviews: Fetch all reviews.
+ * - POST /reviews/{course_id}: Store a new review for a specific course.
+ * - GET /reviews/higherRating: Fetch reviews with higher ratings.
+ * - GET /reviews/lowerRating: Fetch reviews with lower ratings.
+ *
+ * Controllers:
+ * - ReviewController: Handles all review-related actions.
+ */
 Route::prefix('v1')->group(function () {
     Route::get('/reviews/latest', [ReviewController::class, 'latest']);
     Route::get('/reviews', [ReviewController::class, 'index']);
