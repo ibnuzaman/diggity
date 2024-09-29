@@ -1,0 +1,174 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "API documentation for my application",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/dailyVisitors": {
+            "get": {
+                "tags": [
+                    "Visitors"
+                ],
+                "summary": "Get daily visitors traffic",
+                "description": "Returns the total number of visits for the current day. If no visits are recorded for the day, it logs the current visitor's IP and initializes the visit count.",
+                "operationId": "3e80ae6ea6a2d8eb192d362e2671214c",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "dailyVisitorsTraffic": {
+                                            "description": "Total number of visits for the current day",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/weeklyVisitors": {
+            "get": {
+                "tags": [
+                    "Visitors"
+                ],
+                "summary": "Get weekly visitors traffic",
+                "description": "Returns the total number of visits for the current week.",
+                "operationId": "bcd6ec2af5b8450326b1595a6103b460",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "weeklyVisitorsTraffic": {
+                                            "description": "Total number of visits for the current week",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/visitors": {
+            "get": {
+                "tags": [
+                    "Visitors"
+                ],
+                "summary": "Get weekly visitors traffic",
+                "description": "Returns the total number of visits f",
+                "operationId": "d717369ebf962771e135fda09aec51bf",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "weeklyVisitorsTraffic": {
+                                            "description": "Total number of visits for the current week",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/monthlyVisitors": {
+            "get": {
+                "tags": [
+                    "Visitors"
+                ],
+                "summary": "Get monthly visitors traffic",
+                "description": "Returns the total number of visits for the current week.",
+                "operationId": "6a8793a632f07b7287b75e2af0ea5258",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "monthlyVisitorsTraffic": {
+                                            "description": "Total number of visits for the current week",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/yearlyVisitors": {
+            "get": {
+                "tags": [
+                    "Visitors"
+                ],
+                "summary": "Get yearly visitors traffic",
+                "description": "Returns the total number of visits for the current week.",
+                "operationId": "c7acea015ecdd4dbca2dac2cc8fae16a",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "yearlyVisitorsTraffic": {
+                                            "description": "Total number of visits for the current week",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Visitors",
+            "description": "Visitors"
+        }
+    ]
+}
