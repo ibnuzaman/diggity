@@ -29,7 +29,8 @@ class VisitorController extends Controller
         $weeklyTraffic = Traffic::whereBetween('created_at', [$startDate, $endDate])
             ->selectRaw('DATE(created_at) as date, SUM(visits) as visits')
             ->groupBy('date')
-            ->get();
+            ->get()
+            ->sum('visits');
         return response()->json(['weeklyVisitorsTraffic' => $weeklyTraffic]);
     }
 

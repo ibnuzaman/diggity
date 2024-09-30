@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CourseController;
-
+use App\Http\Controllers\FilterCourseController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -63,11 +63,16 @@ Route::prefix('v1')->group(function () {
     Route::get('reviews/higherRating', [ReviewController::class, 'higherRating']);
     Route::get('reviews/lowerRating', [ReviewController::class, 'lowerRating']);
 });
+Route::prefix('v1')->group(function () {
+    Route::post('/courses', [CourseController::class, 'store']);
+});
 
-Route::post('reviews/{course_id}', [ReviewController::class, 'store']);
-Route::get('reviews/', [ReviewController::class, 'index']);
-
-Route::post('/courses', [CourseController::class, 'store']);
-Route::get('/courses', [CourseController::class, 'index']);
-
-// require __DIR__ . '/api.php';
+Route::prefix('v1')->group(function () {
+    Route::get('/courses', [FilterCourseController::class, 'index']);
+    Route::get('/courses/all', [FilterCourseController::class, 'byLatest']);
+    Route::get('/courses/topRated', [FilterCourseController::class, 'byTopRatedCourses']);
+    Route::get('/courses/popular', [FilterCourseController::class, 'byRetrievePopularCourses']);
+    Route::get('/courses', [FilterCourseController::class, 'byCategoryCourses']);
+    Route::get('/courses/level', [FilterCourseController::class, 'byLevel']);
+    Route::get('/courses/price/', [FilterCourseController::class, 'byPrice']);
+});

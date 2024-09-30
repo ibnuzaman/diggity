@@ -44,6 +44,7 @@ class ReviewController extends Controller
             $validatedData = $request->validate([
                 'review' => 'required|string',
                 'rating' => 'required|integer|between:1,5',
+                'user_id' => 'required|integer',
             ]);
 
             $review = new Review();

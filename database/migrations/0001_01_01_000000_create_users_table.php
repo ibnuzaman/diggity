@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('email')->unique();
             // $table->string('email_verified_at')->nullable();
             $table->string('password');
-            // $table->boolean('is_subscribed')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

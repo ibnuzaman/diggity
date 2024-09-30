@@ -4,21 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Review;
+use App\Models\Subscriber;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
-
-
-    public function index()
-    {
-        return response()->json([
-            'data' => Course::all(),
-        ]);
-    }
-
-
-
     public function store(Request $request)
     {
         try {
