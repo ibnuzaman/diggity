@@ -18,12 +18,14 @@ class CourseController extends Controller
                 'name' => 'required|max:255',
                 'price' => 'required|numeric',
                 'level' => 'required|in:beginner,intermediate,advanced',
+                'discount' => 'nullable|numeric',
             ]);
 
             $course = new Course();
             $course->name = $validatedData['name'];
             $course->price = $validatedData['price'];
             $course->level = $validatedData['level'];
+            $course->discount = $validatedData['discount'] ?? 0;
 
             $course->save();
 

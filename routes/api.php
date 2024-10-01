@@ -68,11 +68,10 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::get('/courses', [FilterCourseController::class, 'index']);
     Route::get('/courses/all', [FilterCourseController::class, 'byLatest']);
     Route::get('/courses/topRated', [FilterCourseController::class, 'byTopRatedCourses']);
     Route::get('/courses/popular', [FilterCourseController::class, 'byRetrievePopularCourses']);
-    Route::get('/courses', [FilterCourseController::class, 'byCategoryCourses']);
-    Route::get('/courses/level', [FilterCourseController::class, 'byLevel']);
-    Route::get('/courses/price/', [FilterCourseController::class, 'byPrice']);
+    Route::get('/courses', [FilterCourseController::class, 'byCategoryCourses']); // raw params to get the category id, ex http://127.0.0.1:8000/api/v1/courses?category_id=6,2
+    Route::get('/courses/level', [FilterCourseController::class, 'byLevel']); // raw params to get the level, ex http://127.0.0.1:8000/api/v1/courses/level/?level=Pemula
+    Route::get('/courses/price/', [FilterCourseController::class, 'byPrice']); // raw params to get the price, ex http://127.0.0.1:8000/api/v1/courses/price?price=paid
 });

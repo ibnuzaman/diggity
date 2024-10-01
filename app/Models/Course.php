@@ -31,4 +31,14 @@ class Course extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function subscribers()
+    {
+        return $this->hasMany(Subscriber::class);
+    }
 }

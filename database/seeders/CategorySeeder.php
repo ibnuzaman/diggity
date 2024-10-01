@@ -14,12 +14,12 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            ['name' => 'UI/UX Designer', 'slug' => 'ui-ux-designer', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Website Development', 'slug' => 'website-development', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Mobile App', 'slug' => 'mobile-app', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Data Analysis', 'slug' => 'data-analysis', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Cyber Security', 'slug' => 'cyber-security', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Digital Marketing', 'slug' => 'digital-marketing', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'UI/UX Designer', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Website Development', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mobile App', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Data Analysis', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cyber Security', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Digital Marketing', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

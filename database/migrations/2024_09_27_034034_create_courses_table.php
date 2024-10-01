@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('name');
+            $table->decimal('discount', 8, 2)->default(0);
             $table->decimal('price', 8, 2);
-            $table->enum('level', ['beginner', 'intermediate', 'advanced']);
+            $table->enum('level', ['Pemula', 'Menengah', 'Ahli']);
             $table->timestamps();
         });
     }
