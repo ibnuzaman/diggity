@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

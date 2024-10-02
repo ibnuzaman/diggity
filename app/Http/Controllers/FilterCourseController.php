@@ -93,7 +93,7 @@ class FilterCourseController extends Controller
     public function byPrice(Request $request)
     {
         $price = $request->query('price');
-        if ($price == 'free') {
+        if ($price == 'Gratis') {
             return response()->json([
                 'data' => Course::where('price', $price)
                     ->withAvg('reviews', 'rating')
@@ -105,7 +105,7 @@ class FilterCourseController extends Controller
                     }),
             ]);
         }
-        if ($price == 'paid') {
+        if ($price == 'Berbayar') {
             return response()->json([
                 'data' => Course::where('price', '>', 0)
                     ->withAvg('reviews', 'rating')

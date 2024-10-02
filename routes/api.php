@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\RegisteredController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FilterCourseController;
+use App\Http\Controllers\Admin\AuthenticatedSessionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -63,9 +65,19 @@ Route::prefix('v1')->group(function () {
     Route::get('reviews/higherRating', [ReviewController::class, 'higherRating']);
     Route::get('reviews/lowerRating', [ReviewController::class, 'lowerRating']);
 });
-Route::prefix('v1')->group(function () {
-    Route::post('/courses', [CourseController::class, 'store']);
+
+Route::post('/reg', [RegisteredController::class, 'store']);
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AuthenticatedSessionController::class, 'index']);
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/dashboard', [AuthenticatedSessionController::class, 'dashboard']);
+        Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
+    });
 });
+
 
 Route::prefix('v1')->group(function () {
     Route::get('/courses/all', [FilterCourseController::class, 'byLatest']);
