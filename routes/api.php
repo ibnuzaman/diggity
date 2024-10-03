@@ -8,6 +8,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FilterCourseController;
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -89,4 +90,12 @@ Route::prefix('v1')->group(function () {
     Route::get('/courses', [FilterCourseController::class, 'byCategoryCourses']); // raw params to get the category id, ex http://127.0.0.1:8000/api/v1/courses?category_id=6,2
     Route::get('/courses/level', [FilterCourseController::class, 'byLevel']); // raw params to get the level, ex http://127.0.0.1:8000/api/v1/courses/level/?level=Pemula
     Route::get('/courses/price/', [FilterCourseController::class, 'byPrice']); // raw params to get the price, ex http://127.0.0.1:8000/api/v1/courses/price?price=paid
+});
+
+Route::prefix('v1')->group(function () {
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
+    Route::put('/category/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 });
