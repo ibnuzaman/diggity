@@ -66,9 +66,9 @@ Route::prefix('v1')->group(function () {
     Route::get('reviews/lowerRating', [ReviewController::class, 'lowerRating']);
 });
 
+
+
 Route::post('/reg', [RegisteredController::class, 'store']);
-
-
 Route::prefix('admin')->group(function () {
     Route::get('/', [AuthenticatedSessionController::class, 'index']);
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
@@ -80,6 +80,9 @@ Route::prefix('admin')->group(function () {
 
 
 Route::prefix('v1')->group(function () {
+    Route::post('/courses', [CourseController::class, 'store']);
+    Route::put('/courses/{id}', [CourseController::class, 'update']);
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
     Route::get('/courses/all', [FilterCourseController::class, 'byLatest']);
     Route::get('/courses/topRated', [FilterCourseController::class, 'byTopRatedCourses']);
     Route::get('/courses/popular', [FilterCourseController::class, 'byRetrievePopularCourses']);

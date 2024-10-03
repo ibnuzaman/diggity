@@ -14,8 +14,10 @@ class Course extends Model
     protected $fillable = [
         'slug',
         'name',
-        'price',
-        'level'
+        'starting_price',
+        'level',
+        'discounted_prices',
+        'final_price',
     ];
 
     protected static function boot()

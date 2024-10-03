@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\Review;
-use App\Models\Subscriber;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
@@ -15,17 +14,24 @@ class CourseController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'name' => 'required|max:255',
-                'price' => 'required|numeric',
-                'level' => 'required|in:beginner,intermediate,advanced',
-                'discount' => 'nullable|numeric',
+                'name' => 'required|max:255|unique:courses',
+                'discounted_price' => 'nullable|numeric',
+                'starting_price' => 'required|numeric',
+                'final_price' => 'nullable|numeric',
+                'level' => 'required|in:Pemula,Menengah,Ahli',
             ]);
 
             $course = new Course();
             $course->name = $validatedData['name'];
-            $course->price = $validatedData['price'];
+            $course->starting_price = $validatedData['starting_price'];
             $course->level = $validatedData['level'];
-            $course->discount = $validatedData['discount'] ?? 0;
+            $course->discounted_price = $validatedData['discounted_price'] ?? 0;
+
+            if ($course->discounted_price > 0) {
+                $course->final_price = $course->starting_price - $course->discounted_price;
+            } else {
+                $course->final_price = $course->starting_price;
+            }
 
             $course->save();
 
@@ -37,6 +43,63 @@ class CourseController extends Controller
             return response()->json([
                 'errors' => $e->errors(),
             ], 422);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|max:255|unique:courses,name,' . $id,
+                'discounted_price' => 'nullable|numeric',
+                'starting_price' => 'required|numeric',
+                'final_price' => 'nullable|numeric',
+                'level' => 'required|in:Pemula,Menengah,Ahli',
+            ]);
+
+            $course = Course::findOrFail($id);
+            $course->name = $validatedData['name'];
+            $course->slug = Str::slug($course->name);
+            $course->starting_price = $validatedData['starting_price'];
+            $course->level = $validatedData['level'];
+            $course->discounted_price = $validatedData['discounted_price'] ?? 0;
+
+            if ($course->discounted_price > 0) {
+                $course->final_price = $course->starting_price - $course->discounted_price;
+            } else {
+                $course->final_price = $course->starting_price;
+            }
+
+            $course->save();
+
+            return response()->json([
+                'message' => 'Course updated successfully',
+                'course' => $course,
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Course not found',
+            ], 404);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $course = Course::findOrFail($id);
+            $course->delete();
+
+            return response()->json([
+                'message' => 'Course deleted successfully',
+            ]);
+        } catch (ModelNotFoundException) {
+            return response()->json([
+                'message' => 'Course not found',
+            ], 404);
         }
     }
 }
