@@ -15,6 +15,7 @@ class CourseController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|max:255|unique:courses',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'discounted_price' => 'nullable|numeric',
                 'starting_price' => 'required|numeric',
                 'final_price' => 'nullable|numeric',
@@ -23,6 +24,7 @@ class CourseController extends Controller
 
             $course = new Course();
             $course->name = $validatedData['name'];
+            $course->image = $request->file('image')->store('courses', 'public');
             $course->starting_price = $validatedData['starting_price'];
             $course->level = $validatedData['level'];
             $course->discounted_price = $validatedData['discounted_price'] ?? 0;
@@ -51,6 +53,7 @@ class CourseController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|max:255|unique:courses,name,' . $id,
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'discounted_price' => 'nullable|numeric',
                 'starting_price' => 'required|numeric',
                 'final_price' => 'nullable|numeric',
@@ -59,6 +62,7 @@ class CourseController extends Controller
 
             $course = Course::findOrFail($id);
             $course->name = $validatedData['name'];
+            $course->image = $request->file('image')->store('courses', 'public');
             $course->slug = Str::slug($course->name);
             $course->starting_price = $validatedData['starting_price'];
             $course->level = $validatedData['level'];

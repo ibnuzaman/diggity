@@ -14,10 +14,12 @@ class Course extends Model
     protected $fillable = [
         'slug',
         'name',
+        'image',
         'starting_price',
         'level',
         'discounted_prices',
         'final_price',
+        'subscriber',
     ];
 
     protected static function boot()
@@ -39,8 +41,8 @@ class Course extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function subscribers()
+    public function orders()
     {
-        return $this->hasMany(Subscriber::class);
+        return $this->hasMany(OrderDetails::class);
     }
 }

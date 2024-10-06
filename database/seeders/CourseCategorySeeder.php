@@ -16,10 +16,10 @@ class CourseCategorySeeder extends Seeder
         $categoryIds = DB::table('categories')->pluck('id')->toArray();
         $courseCategories = [];
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             $courseCategories[] = [
                 'category_id' => $categoryIds[array_rand($categoryIds)],
-                'course_id' => rand(1, 10)
+                'course_id' => rand(1, 3)
             ];
         }
 

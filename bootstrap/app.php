@@ -19,7 +19,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'visitors' => LogVisitor::class,
             'admin' => Authenticated::class,
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'stripe/*',
+            'http://example.com/foo/bar',
+            'http://example.com/foo/*',
+            '/callback'
+        ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+    ->withExceptions(function (Exceptions $exceptions) {})->create();

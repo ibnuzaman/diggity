@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FilterCourseController;
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -79,10 +80,29 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-
+/**
+ * API Routes for version 1.
+ *
+ * Prefix: v1
+ *
+ * Routes:
+ * - POST /courses: Store a new course.
+ * - PUT /courses/{id}: Update a specific course.
+ * - DELETE /courses/{id}: Delete a specific course.
+ * - GET /courses/all: Fetch all courses.
+ * - GET /courses/topRated: Fetch top-rated courses.
+ * - GET /courses/popular: Fetch popular courses.
+ * - GET /courses: Fetch courses by category.
+ * - GET /courses/level: Fetch courses by level.
+ * - GET /courses/price: Fetch courses by price.
+ *
+ * Controllers:
+ * - CourseController: Handles all course-related actions.
+ * - FilterCourseController: Handles all course filtering actions.
+ */
 Route::prefix('v1')->group(function () {
     Route::post('/courses', [CourseController::class, 'store']);
-    Route::put('/courses/{id}', [CourseController::class, 'update']);
+    Route::post('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
     Route::get('/courses/all', [FilterCourseController::class, 'byLatest']);
     Route::get('/courses/topRated', [FilterCourseController::class, 'byTopRatedCourses']);
@@ -92,10 +112,43 @@ Route::prefix('v1')->group(function () {
     Route::get('/courses/price/', [FilterCourseController::class, 'byPrice']); // raw params to get the price, ex http://127.0.0.1:8000/api/v1/courses/price?price=paid
 });
 
-Route::prefix('v1')->group(function () {
-    Route::get('/category', [CategoryController::class, 'index']);
-    Route::post('/category', [CategoryController::class, 'store']);
-    Route::get('/category/{id}', [CategoryController::class, 'show']);
-    Route::put('/category/{id}', [CategoryController::class, 'update']);
-    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+
+/**
+ * API Routes for Category Management
+ *
+ * This group of routes is protected by the 'admin' middleware and is prefixed with 'v1'.
+ * It provides the following endpoints for managing categories:
+ *
+ * - GET /v1/category: Retrieve a list of categories.
+ * - POST /v1/category: Create a new category.
+ * - GET /v1/category/{id}: Retrieve a specific category by its ID.
+ * - PUT /v1/category/{id}: Update a specific category by its ID.
+ * - DELETE /v1/category/{id}: Delete a specific category by its ID.
+ *
+ * All routes are handled by the CategoryController.
+ */
+Route::middleware(['admin'])->group(function () {
+    Route::prefix('v1')->group(function () {
+        Route::get('/category', [CategoryController::class, 'index']);
+        Route::post('/category', [CategoryController::class, 'store']);
+        Route::get('/category/{id}', [CategoryController::class, 'show']);
+        Route::put('/category/{id}', [CategoryController::class, 'update']);
+        Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+    });
 });
+
+/**
+ * API Routes for Order Management
+ *
+ * This group of routes is prefixed with 'v1'.
+ * It provides the following endpoints for managing orders:
+ *
+ * - POST /v1/invoice: Create a new invoice.
+ * - POST /v1/callback: Handle the callback from Xendit.
+ * - GET /v1/order: Retrieve a list of orders.
+ *
+ * All routes are handled by the OrderController.
+ */
+Route::post('/invoice', [OrderController::class, 'invoice']);
+Route::post('/callback', [OrderController::class, 'handleCallback']);
+Route::get('/order', [OrderController::class, 'index']);

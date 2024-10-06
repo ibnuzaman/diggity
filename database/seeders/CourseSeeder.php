@@ -13,27 +13,42 @@ class CourseSeeder extends Seeder
     public function run()
     {
 
-        DB::table('Course')->insert([
+        DB::table('courses')->insert([
             [
-                'name' => 'Laravel 8',
-                'slug' => 'laravel-8',
-                'price' => 100000,
+                'slug' => 'course-1',
+                'name' => 'Course 1',
+                'image' => 'course1.jpg',
+                'discounted_price' => 49.99,
+                'starting_price' => 99.99,
+                'final_price' => 79.99,
+                'subscriber' => 100,
                 'level' => 'Pemula',
-                'discount' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name' => 'Laravel 8',
-                'slug' => 'laravel-8',
-                'price' => 100000,
+                'slug' => 'course-2',
+                'name' => 'Course 2',
+                'image' => 'course2.jpg',
+                'discounted_price' => 59.99,
+                'starting_price' => 119.99,
+                'final_price' => 89.99,
+                'subscriber' => 200,
                 'level' => 'Menengah',
-                'discount' => 50000,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name' => 'Laravel 8',
-                'slug' => 'laravel-8',
-                'price' => 100000,
+                'slug' => 'course-3',
+                'name' => 'Course 3',
+                'image' => 'course3.jpg',
+                'discounted_price' => 0,
+                'starting_price' => 149.99,
+                'final_price' => 149.99,
+                'subscriber' => 300,
                 'level' => 'Ahli',
-                'discount' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

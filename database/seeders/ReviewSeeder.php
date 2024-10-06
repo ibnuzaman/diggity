@@ -18,13 +18,13 @@ class ReviewSeeder extends Seeder
             ['review' => 'Great course!', 'rating' => 5, 'user_id' => 1, 'course_id' => 1],
             ['review' => 'Very informative.', 'rating' => 4, 'user_id' => 2, 'course_id' => 2],
             ['review' => 'Well structured.', 'rating' => 5, 'user_id' => 3, 'course_id' => 3],
-            ['review' => 'Could be better.', 'rating' => 3, 'user_id' => 4, 'course_id' => 4],
-            ['review' => 'Excellent content.', 'rating' => 5, 'user_id' => 5, 'course_id' => 5],
-            ['review' => 'Not bad.', 'rating' => 3, 'user_id' => 6, 'course_id' => 1],
-            ['review' => 'Loved it!', 'rating' => 5, 'user_id' => 7, 'course_id' => 2],
-            ['review' => 'Very helpful.', 'rating' => 4, 'user_id' => 8, 'course_id' => 3],
-            ['review' => 'Good explanations.', 'rating' => 4, 'user_id' => 9, 'course_id' => 4],
-            ['review' => 'Highly recommend.', 'rating' => 5, 'user_id' => 10, 'course_id' => 5],
+            ['review' => 'Could be better.', 'rating' => 3, 'user_id' => 1, 'course_id' => 1],
+            ['review' => 'Excellent content.', 'rating' => 5, 'user_id' => 2, 'course_id' => 2],
+            ['review' => 'Not bad.', 'rating' => 3, 'user_id' => 3, 'course_id' => 3],
+            ['review' => 'Loved it!', 'rating' => 5, 'user_id' => 1, 'course_id' => 1],
+            ['review' => 'Very helpful.', 'rating' => 4, 'user_id' => 2, 'course_id' => 2],
+            ['review' => 'Good explanations.', 'rating' => 4, 'user_id' => 3, 'course_id' => 3],
+            ['review' => 'Highly recommend.', 'rating' => 5, 'user_id' => 1, 'course_id' => 1],
         ];
 
         foreach ($reviews as $review) {

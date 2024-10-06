@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('name');
+            $table->string('image');
             $table->decimal('discounted_price', 8, 2)->default(0);
             $table->decimal('starting_price', 8, 2);
             $table->decimal('final_price', 8, 2)->nullable();
+            $table->integer('subscriber')->default(0);
             $table->enum('level', ['Pemula', 'Menengah', 'Ahli']);
             $table->timestamps();
         });
