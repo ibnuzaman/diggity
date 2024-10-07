@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 class CourseController extends Controller
@@ -38,13 +39,15 @@ class CourseController extends Controller
             $course->save();
 
             return response()->json([
+                'status' => Response::HTTP_CREATED,
                 'message' => 'Course created successfully',
                 'course' => $course,
-            ]);
+            ], Response::HTTP_CREATED);
         } catch (ValidationException $e) {
             return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => $e->errors(),
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 
@@ -77,17 +80,20 @@ class CourseController extends Controller
             $course->save();
 
             return response()->json([
+                'status' => Response::HTTP_OK,
                 'message' => 'Course updated successfully',
                 'course' => $course,
-            ]);
+            ], Response::HTTP_OK);
         } catch (ValidationException $e) {
             return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => $e->errors(),
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (ModelNotFoundException $e) {
             return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
                 'message' => 'Course not found',
-            ], 404);
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -98,12 +104,14 @@ class CourseController extends Controller
             $course->delete();
 
             return response()->json([
+                'status' => Response::HTTP_OK,
                 'message' => 'Course deleted successfully',
-            ]);
+            ], Response::HTTP_OK);
         } catch (ModelNotFoundException) {
             return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
                 'message' => 'Course not found',
-            ], 404);
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 }

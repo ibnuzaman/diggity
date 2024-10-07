@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Response;
 
 class ReviewController extends Controller
 {
@@ -51,18 +52,19 @@ class ReviewController extends Controller
             $review->course_id = $course_id;
             $review->review = $validatedData['review'];
             $review->rating = $validatedData['rating'];
-            // $review->user_id = auth()->id();
             $review->user_id = 1; // test user_id
 
             $review->save();
             return response()->json([
+                'status' => Response::HTTP_CREATED,
                 'message' => 'Review created successfully',
                 'review' => $review,
-            ]);
+            ], Response::HTTP_CREATED);
         } catch (ValidationException $e) {
             return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => $e->errors(),
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }

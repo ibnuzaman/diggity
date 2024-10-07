@@ -35,15 +35,15 @@ class OrderController extends Controller
             $course = Course::find($request->input('course_id'));
             if (!$user) {
                 return response()->json([
-                    'status' => 404,
+                    'status' => Response::HTTP_NOT_FOUND,
                     'message' => 'User not found',
-                ], 404);
+                ], Response::HTTP_NOT_FOUND);
             }
             if (!$course) {
                 return response()->json([
-                    'status' => 404,
+                    'status' => Response::HTTP_NOT_FOUND,
                     'message' => 'Course not found',
-                ], 404);
+                ], Response::HTTP_NOT_FOUND);
             }
 
             $no_transaction = 'DGT-' . strtoupper(uniqid());
@@ -62,14 +62,12 @@ class OrderController extends Controller
             $order->no_transaction = $no_transaction;
 
             $item = new InvoiceItem([
-                'name' => 'Course',
-                'quantity' => 1,
                 'price' => $order->price,
             ]);
 
             $createInvoice = new CreateInvoiceRequest([
                 'external_id' => $external_id,
-                'payer_email' => $request->payer_email,
+                'payer_email' => User::find($request->input('user_id'))->email,
                 'amount' => $order->total_price,
                 'invoice_duration' => 172800,
                 'items' => [$item],
@@ -86,14 +84,16 @@ class OrderController extends Controller
             $order->save();
 
             return response()->json([
+                'status' => Response::HTTP_CREATED,
                 'message' => 'Invoice created successfully',
                 'data' => $order,
-            ]);
+            ], Response::HTTP_CREATED);
         } catch (\Exception $e) {
             return response()->json([
+                'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' => 'Failed to create invoice',
                 'error' => $e->getMessage(),
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -103,23 +103,18 @@ class OrderController extends Controller
         $callbackToken = env('XENDIT_CALLBACK_TOKEN');
 
         try {
-            // return response()->json([
-            //     'message' => 'Callback handled successfully',
-            //     'token' => $getToken,
-            //     // 'callback_token' => $callbackToken,
-            // ], Response::HTTP_OK);
             $order = OrderDetails::where('external_id', $request->external_id)->first();
 
             if (!$callbackToken) {
                 return response()->json([
-                    'status' => 'error',
+                    'status' => Response::HTTP_NOT_FOUND,
                     'message' => 'Callback token not found',
                 ], Response::HTTP_NOT_FOUND);
             }
 
             if ($getToken !== $callbackToken) {
                 return response()->json([
-                    'status' => 'error',
+                    'status' => Response::HTTP_UNAUTHORIZED,
                     'message' => 'Unauthorized',
                 ], Response::HTTP_UNAUTHORIZED);
             }
@@ -138,21 +133,16 @@ class OrderController extends Controller
                 }
             }
 
-            // $course = Course::find($order->course_id);
-            // if ($order->status === 'paid') {
-            //     $course->users()->attach($order->user_id);
-            //     $course->increment('subscriber');
-            // }
-
             return response()->json([
                 'message' => 'Callback handled successfully',
                 'status' => Response::HTTP_OK,
             ]);
         } catch (\Exception $e) {
             return response()->json([
+                'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' => 'Failed to handle callback',
                 'error' => $e->getMessage(),
-            ], 500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -13,18 +14,20 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         return response()->json([
+            'status' => Response::HTTP_OK,
             'message' => 'Category Controller',
             'categories' => $categories,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function show($id)
     {
         $category = Category::findOrFail($id);
         return response()->json([
+            'status' => Response::HTTP_OK,
             'message' => 'Category Controller',
             'category' => $category,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function store(Request $request)
@@ -39,13 +42,15 @@ class CategoryController extends Controller
             $category->save();
 
             return response()->json([
+                'status' => Response::HTTP_CREATED,
                 'message' => 'Category created successfully',
                 'category' => $category,
-            ]);
+            ], Response::HTTP_CREATED);
         } catch (ValidationException $e) {
             return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => $e->errors(),
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 
@@ -62,17 +67,20 @@ class CategoryController extends Controller
             $category->save();
 
             return response()->json([
+                'status' => Response::HTTP_OK,
                 'message' => 'Category updated successfully',
                 'category' => $category,
-            ]);
+            ], Response::HTTP_OK);
         } catch (ValidationException $e) {
             return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => $e->errors(),
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (ModelNotFoundException $e) {
             return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
                 'message' => 'Category not found',
-            ], 404);
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -83,12 +91,14 @@ class CategoryController extends Controller
             $category->delete();
 
             return response()->json([
+                'status' => Response::HTTP_OK,
                 'message' => 'Category deleted successfully',
-            ]);
+            ], Response::HTTP_OK);
         } catch (ModelNotFoundException $e) {
             return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
                 'message' => 'Category not found',
-            ], 404);
+            ], Response::HTTP_NOT_FOUND);
         }
     }
 }

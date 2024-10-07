@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -18,8 +19,8 @@ class LoginForm extends Form
     #[Validate('required|string')]
     public string $password = '';
 
-    #[Validate('boolean')]
-    public bool $remember = false;
+    // #[Validate('boolean')]
+    // public bool $remember = false;
 
     /**
      * Attempt to authenticate the request's credentials.
@@ -30,15 +31,13 @@ class LoginForm extends Form
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'form.email' => trans('auth.failed'),
-            ]);
+        if (Auth::guard('admin')->attempt($this->only(['email', 'password']))) {
+            $data = $this->only(['email', 'password']);
+            dd($data);
         }
-
-        RateLimiter::clear($this->throttleKey());
+        if (Auth::guard('web')->attempt($this->only(['email', 'password']))) {
+            RateLimiter::clear($this->throttleKey());
+        }
     }
 
     /**
@@ -67,6 +66,6 @@ class LoginForm extends Form
      */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->email) . '|' . request()->ip());
     }
 }
