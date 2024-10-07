@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Response;
 
@@ -53,6 +54,7 @@ class ReviewController extends Controller
             $review->review = $validatedData['review'];
             $review->rating = $validatedData['rating'];
             $review->user_id = 1; // test user_id
+            // $review->user_id = User::find($validatedData['user_id'])->id;
 
             $review->save();
             return response()->json([

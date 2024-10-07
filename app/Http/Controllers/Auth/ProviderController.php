@@ -36,7 +36,8 @@ class ProviderController extends Controller
             //     'google_refresh_token' => $socialUser->refreshToken,
             // ]);
             // Auth::login($registeredUser);
-            redirect('login')->withErrors('User already registered.');
+            // redirect('login')->withErrors('User already registered.');
+            Auth::login($registeredUser);
         } else {
             $user = User::create([
                 'name' => $socialUser->getName(),

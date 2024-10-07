@@ -2,7 +2,6 @@
 
 use App\Http\Middleware\Authenticated;
 use App\Http\Middleware\LogVisitor;
-use App\Models\Admin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
