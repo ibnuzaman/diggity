@@ -11,11 +11,51 @@ class BootcampController extends Controller
 {
     public function index(): JsonResponse
     {
+        $bootcamps = Bootcamp::paginate(6);
+
+        if ($bootcamps->isEmpty()) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'No bootcamps found',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
         return response()->json([
             'status' => Response::HTTP_OK,
-            'message' => 'in Bootcamp',
+            'message' => 'Bootcamps',
+            'data' => $bootcamps
         ]);
     }
+
+
+    public function showByCategory(Request $request): JsonResponse
+    {
+
+        $categoryId = $request->query('category_id');
+
+        if (!$categoryId) {
+            return response()->json([
+                'status' => Response::HTTP_BAD_REQUEST,
+                'message' => 'Category ID is required',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $bootcamps = Bootcamp::where('category_id', $categoryId)->paginate(6);
+
+        if ($bootcamps->isEmpty()) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'No bootcamps found for this category',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Bootcamps',
+            'data' => $bootcamps
+        ]);
+    }
+
 
     public function create(Request $request)
     {
@@ -147,6 +187,45 @@ class BootcampController extends Controller
             return response()->json([
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' => 'Failed to delete bootcamp',
+                'data' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function register(Request $request, $id)
+    {
+        try {
+            $bootcamp = Bootcamp::find($id);
+
+            if (!$bootcamp) {
+                return response()->json([
+                    'status' => Response::HTTP_NOT_FOUND,
+                    'message' => 'Bootcamp not found',
+                ], Response::HTTP_NOT_FOUND);
+            }
+
+            $validateData = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+            ]);
+
+            $message = "Pesanan Bootcamp " . $bootcamp->name . ".\n\n" .
+                "Name: " . $validateData['name'] . "\n" .
+                "Email: " . $validateData['email'] . "\n" .
+                "Phone: " . $validateData['phone'];
+
+            $whatsappUrl = "https://wa.me/6287843052780?text=" . urlencode($message);
+
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'message' => 'Redirecting to WhatsApp',
+                'whatsapp_url' => $whatsappUrl
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => 'Failed to process order',
                 'data' => $e->getMessage()
             ]);
         }

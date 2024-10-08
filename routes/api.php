@@ -160,3 +160,5 @@ Route::post('/bootcamp', [BootcampController::class, 'create']);
 Route::get('/bootcamp/{id}', [BootcampController::class, 'show']);
 Route::post('/bootcamp/{id}', [BootcampController::class, 'update']);
 Route::delete('/bootcamp/{id}', [BootcampController::class, 'destroy']);
+Route::post('/bootcamp/{id}/register', [BootcampController::class, 'register']);
+Route::get('category/bootcamp/', [BootcampController::class, 'showByCategory']);
