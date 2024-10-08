@@ -10,6 +10,7 @@ use App\Http\Controllers\FilterCourseController;
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BootcampController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -152,3 +153,10 @@ Route::middleware(['admin'])->group(function () {
 Route::post('/invoice', [OrderController::class, 'invoice']);
 Route::post('/callback', [OrderController::class, 'handleCallback']);
 Route::get('/order', [OrderController::class, 'index']);
+
+
+Route::get('/bootcamp', [BootcampController::class, 'index']);
+Route::post('/bootcamp', [BootcampController::class, 'create']);
+Route::get('/bootcamp/{id}', [BootcampController::class, 'show']);
+Route::post('/bootcamp/{id}', [BootcampController::class, 'update']);
+Route::delete('/bootcamp/{id}', [BootcampController::class, 'destroy']);
