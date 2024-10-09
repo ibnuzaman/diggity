@@ -12,12 +12,15 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BootcampController;
 
+
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 Route::get('/up', function () {
     return response()->json(['status' => 'ok']);
 });
+
 
 /**
  * API Routes for version 1.
@@ -65,21 +68,21 @@ Route::prefix('v1')->group(function () {
     Route::get('/reviews/latest', [ReviewController::class, 'latest']);
     Route::get('/reviews', [ReviewController::class, 'index']);
     Route::post('/reviews/{course_id}', [ReviewController::class, 'store']);
-    Route::get('reviews/higherRating', [ReviewController::class, 'higherRating']);
-    Route::get('reviews/lowerRating', [ReviewController::class, 'lowerRating']);
+    Route::get('reviews/higher-rating', [ReviewController::class, 'higherRating']);
+    Route::get('reviews/lower-rating', [ReviewController::class, 'lowerRating']);
 });
 
 
 
-Route::post('/reg', [RegisteredController::class, 'store']);
-Route::prefix('admin')->group(function () {
-    Route::get('/', [AuthenticatedSessionController::class, 'index']);
-    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-    Route::middleware(['admin'])->group(function () {
-        Route::get('/dashboard', [AuthenticatedSessionController::class, 'dashboard']);
-        Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
-    });
-});
+// Route::post('/reg', [RegisteredController::class, 'store']);
+// Route::prefix('admin')->group(function () {
+//     Route::get('/', [AuthenticatedSessionController::class, 'index']);
+//     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+//     Route::middleware(['admin'])->group(function () {
+//         Route::get('/dashboard', [AuthenticatedSessionController::class, 'dashboard']);
+//         Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
+//     });
+// });
 
 /**
  * API Routes for version 1.
@@ -106,11 +109,11 @@ Route::prefix('v1')->group(function () {
     Route::post('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
     Route::get('/courses/all', [FilterCourseController::class, 'byLatest']);
-    Route::get('/courses/topRated', [FilterCourseController::class, 'byTopRatedCourses']);
-    Route::get('/courses/popular', [FilterCourseController::class, 'byRetrievePopularCourses']);
-    Route::get('/courses', [FilterCourseController::class, 'byCategoryCourses']); // raw params to get the category id, ex http://127.0.0.1:8000/api/v1/courses?category_id=6,2
-    Route::get('/courses/level', [FilterCourseController::class, 'byLevel']); // raw params to get the level, ex http://127.0.0.1:8000/api/v1/courses/level/?level=Pemula
-    Route::get('/courses/price/', [FilterCourseController::class, 'byPrice']); // raw params to get the price, ex http://127.0.0.1:8000/api/v1/courses/price?price=paid
+    Route::get('/courses/top-rated', [FilterCourseController::class, 'byTopRatedCourses']);
+    Route::get('/courses/popular', [FilterCourseController::class, 'byPopularCourses']);
+    Route::get('/courses/by-category', [FilterCourseController::class, 'byCategoryCourses']); // raw params to get the category id, ex http://127.0.0.1:8000/api/v1/courses/category?category_id=6,2
+    Route::get('/courses/by-level', [FilterCourseController::class, 'byLevel']); // raw params to get the level, ex http://127.0.0.1:8000/api/v1/courses/level/?level=Pemula
+    Route::get('/courses/by-price/', [FilterCourseController::class, 'byPrice']); // raw params to get the price, ex http://127.0.0.1:8000/api/v1/courses/price?price=paid
 });
 
 
@@ -128,7 +131,7 @@ Route::prefix('v1')->group(function () {
  *
  * All routes are handled by the CategoryController.
  */
-Route::middleware(['admin'])->group(function () {
+// Route::middleware(['admin'])->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('/category', [CategoryController::class, 'index']);
         Route::post('/category', [CategoryController::class, 'store']);
@@ -136,7 +139,7 @@ Route::middleware(['admin'])->group(function () {
         Route::put('/category/{id}', [CategoryController::class, 'update']);
         Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
     });
-});
+// });
 
 /**
  * API Routes for Order Management

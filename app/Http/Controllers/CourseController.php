@@ -9,8 +9,60 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
+
+
 class CourseController extends Controller
 {
+   /**
+ * @OA\Post(
+ *     path="/api/v1/courses",
+ *     summary="Create a new course",
+ *     tags={"Courses"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(
+ *                 required={"name", "image", "starting_price", "level"},
+ *                 @OA\Property(property="name", type="string", example="Introduction to Programming"),
+ *                 @OA\Property(property="image", type="string", format="binary", description="Image file"),
+ *                 @OA\Property(property="discounted_price", type="number", format="float", example=50.00),
+ *                 @OA\Property(property="starting_price", type="number", format="float", example=100.00),
+ *                 @OA\Property(property="final_price", type="number", format="float", example=50.00),
+ *                 @OA\Property(property="level", type="string", enum={"Pemula", "Menengah", "Ahli"}, example="Pemula")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Course created successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="integer", example=201),
+ *             @OA\Property(property="message", type="string", example="Course created successfully"),
+ *             @OA\Property(property="course", type="object",
+ *                 @OA\Property(property="id", type="integer", example=1),
+ *                 @OA\Property(property="name", type="string", example="Introduction to Programming"),
+ *                 @OA\Property(property="image", type="string", example="courses/image.jpg"),
+ *                 @OA\Property(property="starting_price", type="number", format="float", example=100.00),
+ *                 @OA\Property(property="discounted_price", type="number", format="float", example=50.00),
+ *                 @OA\Property(property="final_price", type="number", format="float", example=50.00),
+ *                 @OA\Property(property="level", type="string", example="Pemula"),
+ *                 @OA\Property(property="created_at", type="string", format="date-time", example="2023-10-01T12:00:00Z"),
+ *                 @OA\Property(property="updated_at", type="string", format="date-time", example="2023-10-01T12:00:00Z")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="status", type="integer", example=422),
+ *             @OA\Property(property="errors", type="object", example={"name": {"The name field is required."}})
+ *         )
+ *     )
+ * )
+ */
+
     public function store(Request $request)
     {
         try {
@@ -51,6 +103,69 @@ class CourseController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/v1/courses/{id}",
+     *     summary="Update an existing course",
+     *     tags={"Courses"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the course to update",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+    *     @OA\RequestBody(
+    *         required=true,
+    *         @OA\MediaType(
+    *             mediaType="multipart/form-data",
+    *             @OA\Schema(
+    *                 required={"name", "image", "starting_price", "level"},
+    *                 @OA\Property(property="name", type="string", example="Advanced PHP Course"),
+    *                 @OA\Property(property="image", type="string", format="binary"),
+    *                 @OA\Property(property="discounted_price", type="number", format="float", example=50.00),
+    *                 @OA\Property(property="starting_price", type="number", format="float", example=100.00),
+    *                 @OA\Property(property="final_price", type="number", format="float", example=50.00),
+    *                 @OA\Property(property="level", type="string", enum={"Pemula", "Menengah", "Ahli"}, example="Menengah")
+    *             )
+    *         )
+    *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Course updated successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=200),
+     *             @OA\Property(property="message", type="string", example="Course updated successfully"),
+     *             @OA\Property(property="course", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Advanced PHP Course"),
+     *                 @OA\Property(property="image", type="string", example="courses/advanced-php-course.jpg"),
+     *                 @OA\Property(property="slug", type="string", example="advanced-php-course"),
+     *                 @OA\Property(property="starting_price", type="number", format="float", example=100.00),
+     *                 @OA\Property(property="discounted_price", type="number", format="float", example=50.00),
+     *                 @OA\Property(property="final_price", type="number", format="float", example=50.00),
+     *                 @OA\Property(property="level", type="string", example="Menengah")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=422),
+     *             @OA\Property(property="errors", type="object")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Course not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=404),
+     *             @OA\Property(property="message", type="string", example="Course not found")
+     *         )
+     *     )
+     * )
+     */
     public function update(Request $request, $id)
     {
         try {
@@ -97,6 +212,40 @@ class CourseController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/v1/courses/{id}",
+     *     summary="Delete a course",
+     *     description="Deletes a course by its ID",
+     *     operationId="deleteCourse",
+     *     tags={"Courses"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the course to delete",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Course deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=200),
+     *             @OA\Property(property="message", type="string", example="Course deleted successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Course not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=404),
+     *             @OA\Property(property="message", type="string", example="Course not found")
+     *         )
+     *     )
+     * )
+     */
     public function destroy($id)
     {
         try {

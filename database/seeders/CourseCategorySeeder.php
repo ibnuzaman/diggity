@@ -14,12 +14,17 @@ class CourseCategorySeeder extends Seeder
     public function run()
     {
         $categoryIds = DB::table('categories')->pluck('id')->toArray();
+
+        if (empty($categoryIds)) {            
+            return;
+        }
+
         $courseCategories = [];
 
         for ($i = 1; $i <= 3; $i++) {
             $courseCategories[] = [
                 'category_id' => $categoryIds[array_rand($categoryIds)],
-                'course_id' => rand(1, 3)
+                'course_id' => rand(1, 3),
             ];
         }
 
