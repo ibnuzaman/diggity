@@ -29,20 +29,26 @@ class ProviderController extends Controller
             ->orWhere('email', $socialUser->getEmail())
             ->first();
 
-        if (!$registeredUser) {
-            $user = User::updateOrCreate([
-                'google_id' => $socialUser->id,
-            ], [
-                'name' => $socialUser->name,
-                'email' => $socialUser->email,
-                'password' => Hash::make(Str::random(16)),
+        if ($registeredUser) {
+            // $registeredUser->update([
+            //     'google_id' => $socialUser->getId(),
+            //     'google_token' => $socialUser->token,
+            //     'google_refresh_token' => $socialUser->refreshToken,
+            // ]);
+            // Auth::login($registeredUser);
+            // redirect('login')->withErrors('User already registered.');
+            Auth::login($registeredUser);
+        } else {
+            $user = User::create([
+                'name' => $socialUser->getName(),
+                'email' => $socialUser->getEmail(),
+                'google_id' => $socialUser->getId(),
                 'google_token' => $socialUser->token,
                 'google_refresh_token' => $socialUser->refreshToken,
+                'password' => Hash::make(Str::random(24)),
             ]);
 
             Auth::login($user);
-        } else {
-            Auth::login($registeredUser);
         }
 
         return redirect('/dashboard');

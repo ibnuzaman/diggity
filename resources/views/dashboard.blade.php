@@ -15,3 +15,10 @@
         </div>
     </div>
 </x-app-layout>
+
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <x-button type="submit">
+        {{ __('Log Out') }}
+    </x-button>
+</form>
