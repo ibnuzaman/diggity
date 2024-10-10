@@ -158,6 +158,21 @@ Route::post('/callback', [OrderController::class, 'handleCallback']);
 Route::get('/order', [OrderController::class, 'index']);
 
 
+/**
+ * API Routes for Bootcamp Management
+ *
+ * This file contains the following routes:
+ *
+ * - GET /bootcamps: Retrieve a list of all bootcamps.
+ * - POST /bootcamp: Create a new bootcamp.
+ * - GET /bootcamp/{id}: Retrieve details of a specific bootcamp by ID.
+ * - PUT /bootcamp/{id}: Update an existing bootcamp by ID.
+ * - DELETE /bootcamp/{id}: Delete a specific bootcamp by ID.
+ * - POST /bootcamp/{id}/register: Register for a specific bootcamp by ID.
+ * - GET /category/bootcamps: Retrieve bootcamps filtered by category.
+ *
+ * Each route is handled by the BootcampController.
+ */
 Route::get('/bootcamps', [BootcampController::class, 'index']);
 Route::post('/bootcamp', [BootcampController::class, 'create']);
 Route::get('/bootcamp/{id}', [BootcampController::class, 'show']);

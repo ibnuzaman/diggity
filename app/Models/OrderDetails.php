@@ -37,10 +37,10 @@ class OrderDetails extends Model
 
         static::creating(function ($model) {
             if (empty($model->external_id)) {
-                $model->external_id = 'INV-' . $model->unique_code;
+                $model->external_id = 'DGID-' . $model->unique_code;
             }
             if (empty($model->no_transaction)) {
-                $model->no_transaction = 'TRX-' . $model->unique_code;
+                $model->no_transaction = 'DGT-' . $model->unique_code;
             }
         });
 
