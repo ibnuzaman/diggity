@@ -158,10 +158,10 @@ Route::post('/callback', [OrderController::class, 'handleCallback']);
 Route::get('/order', [OrderController::class, 'index']);
 
 
-Route::get('/bootcamp', [BootcampController::class, 'index']);
+Route::get('/bootcamps', [BootcampController::class, 'index']);
 Route::post('/bootcamp', [BootcampController::class, 'create']);
 Route::get('/bootcamp/{id}', [BootcampController::class, 'show']);
-Route::post('/bootcamp/{id}', [BootcampController::class, 'update']);
+Route::put('/bootcamp/{id}', [BootcampController::class, 'update']);
 Route::delete('/bootcamp/{id}', [BootcampController::class, 'destroy']);
 Route::post('/bootcamp/{id}/register', [BootcampController::class, 'register']);
-Route::get('category/bootcamp/', [BootcampController::class, 'showByCategory']);
+Route::get('category/bootcamps/', [BootcampController::class, 'showByCategory']);
