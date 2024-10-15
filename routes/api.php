@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BootcampController;
+use App\Http\Controllers\WebinarController;
 
 
 
@@ -180,3 +181,10 @@ Route::put('/bootcamp/{id}', [BootcampController::class, 'update']);
 Route::delete('/bootcamp/{id}', [BootcampController::class, 'destroy']);
 Route::post('/bootcamp/{id}/register', [BootcampController::class, 'register']);
 Route::get('category/bootcamps/', [BootcampController::class, 'showByCategory']);
+
+
+
+Route::get('/webinar', [WebinarController::class, 'index']);
+Route::get('/webinar/{id}', [WebinarController::class, 'show']);
+Route::post('/webinar', [WebinarController::class, 'store']);
+Route::put('/webinar/{id}', [WebinarController::class, 'update']);
