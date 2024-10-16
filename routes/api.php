@@ -12,6 +12,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BootcampController;
 use App\Http\Controllers\WebinarController;
+use App\Http\Controllers\SpeakerController;
+use App\Http\Controllers\MaterialController;
 
 
 
@@ -188,3 +190,14 @@ Route::get('/webinar', [WebinarController::class, 'index']);
 Route::get('/webinar/{id}', [WebinarController::class, 'show']);
 Route::post('/webinar', [WebinarController::class, 'store']);
 Route::put('/webinar/{id}', [WebinarController::class, 'update']);
+Route::delete('/webinar/{id}', [WebinarController::class, 'destroy']);
+
+
+Route::get('speaker', [SpeakerController::class, 'index']);
+Route::get('speaker/{id}', [SpeakerController::class, 'show']);
+Route::post('speaker', [SpeakerController::class, 'store']);
+Route::put('speaker/{id}', [SpeakerController::class, 'update']);
+Route::delete('speaker/{id}', [SpeakerController::class, 'destroy']);
+
+
+Route::get('/material', [MaterialController::class, 'index']);

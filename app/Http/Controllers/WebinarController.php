@@ -145,4 +145,32 @@ class WebinarController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        try {
+            $webinar = Webinar::find($id);
+            if (!$webinar) {
+                return response()->json([
+                    'message' => Response::HTTP_NOT_FOUND,
+                    'status' => 'Failed',
+                    'data' => 'Data not found',
+                ], Response::HTTP_NOT_FOUND);
+
+            } 
+            $webinar->delete();
+            return response()->json([
+                'message' => Response::HTTP_OK,
+                'status' => 'Connected',
+                'data' => 'Data deleted successfully',
+            ],Response::HTTP_OK);                       
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'message' => Response::HTTP_BAD_REQUEST,
+                'status' => 'Failed',
+                'data' => $e->getMessage(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
 }
