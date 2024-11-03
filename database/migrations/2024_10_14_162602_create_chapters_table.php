@@ -20,6 +20,10 @@ return new class extends Migration
                 table: 'materials',
                 indexName: 'chapters_material_id_foreign'
             );
+            $table->foreignId('sub_chapter_id')->constrained(
+                table: 'sub_chapters',
+                indexName: 'chapters_sub_chapter_id_foreign'
+            );
             $table->timestamps();
         });
     }

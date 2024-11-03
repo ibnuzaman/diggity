@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('sub_chapter_name');
             $table->text('sub_chapter_order');
-            $table->uuid('chapter_id')->constrained(
+            $table->foreignUuid('chapter_id')->constrained(
                 table: 'chapters',
                 indexName: 'sub_chapters_chapter_id_foreign'
             );

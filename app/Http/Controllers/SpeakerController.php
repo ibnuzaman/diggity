@@ -7,7 +7,7 @@ use App\Models\Speaker;
 use Symfony\Component\HttpFoundation\Response;
 
 class SpeakerController extends Controller
-{
+{    
     public function index()
     {
         try{

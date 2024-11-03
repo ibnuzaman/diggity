@@ -201,3 +201,4 @@ Route::delete('speaker/{id}', [SpeakerController::class, 'destroy']);
 
 
 Route::get('/material', [MaterialController::class, 'index']);
+     

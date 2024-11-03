@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('webinars', function (Blueprint $table) {            
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->string('link_image');
+            $table->string('image')->nullable();
             $table->date('webinar_date');
             $table->time('start_time');
             $table->time('end_time');
@@ -27,7 +27,14 @@ return new class extends Migration
                 table: 'categories',
                 indexName: 'webinars_category_id_foreign'
             );
-
+            $table->foreignId('material_id')->contrained(
+                table: 'materials',
+                indexName: 'webinars_material_id_foreign'
+            );
+            $table->foreignId('speaker_id')->contrained(
+                table: 'speakers',
+                indexName: 'webinars_speaker_id_foreign'
+            );        
             $table->timestamps();
         });
     }
