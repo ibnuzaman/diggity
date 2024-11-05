@@ -21,5 +21,17 @@ class CategorySeeder extends Seeder
             ['name' => 'Cyber Security', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Digital Marketing', 'created_at' => now(), 'updated_at' => now()],
         ]);
+    DB::table('categories')->insert([
+        ['name' => 'Cloud Computing', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Blockchain', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Artificial Intelligence', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Machine Learning', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Internet of Things', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Augmented Reality', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Virtual Reality', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Big Data', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'DevOps', 'created_at' => now(), 'updated_at' => now()],
+        ['name' => 'Quantum Computing', 'created_at' => now(), 'updated_at' => now()],
+    ]);
     }
 }

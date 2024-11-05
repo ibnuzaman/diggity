@@ -19,11 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => Authenticated::class,
         ]);
 
-        $middleware->validateCsrfTokens(except: [
-            'stripe/*',
-            'http://example.com/foo/bar',
-            'http://example.com/foo/*',
-            '/callback'
+        $middleware->validateCsrfTokens(except: [            
+            '/api/callback'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {})->create();

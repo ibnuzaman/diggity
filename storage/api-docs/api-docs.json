@@ -19,6 +19,815 @@
         }
     ],
     "paths": {
+        "/api/bootcamps": {
+            "get": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Get list of bootcamps",
+                "operationId": "3a60c1558f0cdd295b6bcca21705794c",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamps"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Bootcamp Name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Bootcamp Description"
+                                                    },
+                                                    "bootcamp_date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2023-10-01"
+                                                    },
+                                                    "bootcamp_level": {
+                                                        "type": "string",
+                                                        "example": "Pemula"
+                                                    },
+                                                    "available_seats": {
+                                                        "type": "integer",
+                                                        "example": 20
+                                                    },
+                                                    "category_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No bootcamps found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No bootcamps found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/bootcamps/": {
+            "get": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Get list of bootcamps by category",
+                "operationId": "0358f2416b098a36f25630ce011392d0",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamps"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Bootcamp Name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Bootcamp Description"
+                                                    },
+                                                    "bootcamp_date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2023-10-01"
+                                                    },
+                                                    "bootcamp_level": {
+                                                        "type": "string",
+                                                        "example": "Pemula"
+                                                    },
+                                                    "available_seats": {
+                                                        "type": "integer",
+                                                        "example": 20
+                                                    },
+                                                    "category_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Category ID is required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Category ID is required"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No bootcamps found for this category",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No bootcamps found for this category"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/bootcamp": {
+            "post": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Create a new bootcamp",
+                "operationId": "4d1022fdac7ecd91e66e7b36f79db520",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Bootcamp Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Bootcamp Description"
+                                    },
+                                    "bootcamp_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-10-01"
+                                    },
+                                    "bootcamp_level": {
+                                        "type": "string",
+                                        "example": "Pemula"
+                                    },
+                                    "available_seats": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Bootcamp created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp created successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Bootcamp Name"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Bootcamp Description"
+                                                },
+                                                "bootcamp_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2023-10-01"
+                                                },
+                                                "bootcamp_level": {
+                                                    "type": "string",
+                                                    "example": "Pemula"
+                                                },
+                                                "available_seats": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to create bootcamp",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to create bootcamp"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/bootcamp/{id}": {
+            "get": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Get bootcamp by ID",
+                "operationId": "49b8c4dbf918c70f7738faad71a9afe2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bootcamp ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d3545c8-2ecf-4986-8362-11e34ab0f720"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Bootcamp Name"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Bootcamp Description"
+                                                },
+                                                "bootcamp_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2023-10-01"
+                                                },
+                                                "bootcamp_level": {
+                                                    "type": "string",
+                                                    "example": "Pemula"
+                                                },
+                                                "available_seats": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bootcamp not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to retrieve bootcamp",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to retrieve bootcamp"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Update a bootcamp",
+                "operationId": "79976befc5d40f1f72cafca64ef4e2ef",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bootcamp ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Bootcamp Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Bootcamp Description"
+                                    },
+                                    "bootcamp_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-10-01"
+                                    },
+                                    "bootcamp_level": {
+                                        "type": "string",
+                                        "example": "Pemula"
+                                    },
+                                    "available_seats": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Bootcamp updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp updated successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d3545c8-2ecf-4986-8362-11e34ab0f720"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Bootcamp Name"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Bootcamp Description"
+                                                },
+                                                "bootcamp_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2023-10-01"
+                                                },
+                                                "bootcamp_level": {
+                                                    "type": "string",
+                                                    "example": "Pemula"
+                                                },
+                                                "available_seats": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bootcamp not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to update bootcamp",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to update bootcamp"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Delete a bootcamp",
+                "operationId": "260c38b032f7a196c8faa6f084390244",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bootcamp ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Bootcamp deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bootcamp not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to delete bootcamp",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to delete bootcamp"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/bootcamp/{id}/register": {
+            "post": {
+                "tags": [
+                    "Bootcamps"
+                ],
+                "summary": "Register for a bootcamp",
+                "operationId": "cd3372690d287cf3f2d2ed3c5077a594",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bootcamp ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Redirecting to WhatsApp",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Redirecting to WhatsApp"
+                                        },
+                                        "whatsapp_url": {
+                                            "type": "string",
+                                            "example": "https://wa.me/6287843052780?text=..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bootcamp not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bootcamp not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to process order",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to process order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/category": {
             "get": {
                 "tags": [
@@ -1217,6 +2026,193 @@
                 }
             }
         },
+        "/api/invoice": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create an invoice",
+                "operationId": "40720301d0d225906d74656397857203",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "course_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "tax": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 0.11
+                                    },
+                                    "service_charge": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10000
+                                    },
+                                    "invoice_url": {
+                                        "type": "string",
+                                        "example": "http://example.com/invoice"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "pending"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Invoice created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invoice created successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "external_id": {
+                                                    "type": "string",
+                                                    "example": "DGID-123456789"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 100000
+                                                },
+                                                "discount": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 5000
+                                                },
+                                                "tax": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 11000
+                                                },
+                                                "service_charge": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 10000
+                                                },
+                                                "total_price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 116000
+                                                },
+                                                "invoice_url": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/invoice"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "pending"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "course_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "no_transaction": {
+                                                    "type": "string",
+                                                    "example": "DGT-123456789"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User or Course not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to create invoice",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to create invoice"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input data. Please check your request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid input data. Please check your request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/reviews": {
             "get": {
                 "tags": [
@@ -1763,9 +2759,216 @@
                     }
                 }
             }
+        },
+        "/api/webinar": {
+            "post": {
+                "tags": [
+                    "Webinars"
+                ],
+                "summary": "Create a new webinar",
+                "operationId": "d5efc6817cfe44cbc109d4fde899a3e5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "webinar_date",
+                                    "start_time",
+                                    "end_time",
+                                    "meeting_room",
+                                    "starting_price",
+                                    "discounted_price",
+                                    "description",
+                                    "category_id",
+                                    "materials_count",
+                                    "material_name",
+                                    "chapter_name",
+                                    "chapter_order",
+                                    "chapter_count",
+                                    "sub_chapter_name",
+                                    "sub_chapter_order",
+                                    "sub_chapter_count",
+                                    "speaker_name",
+                                    "speaker_job",
+                                    "speaker_summary",
+                                    "company_speaker"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Webinar Title"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "image.jpg"
+                                    },
+                                    "webinar_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-10-01"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "10:00"
+                                    },
+                                    "end_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "12:00"
+                                    },
+                                    "meeting_room": {
+                                        "type": "string",
+                                        "example": "Room 101"
+                                    },
+                                    "starting_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100
+                                    },
+                                    "discounted_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 80
+                                    },
+                                    "final_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 80
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Webinar Description"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "materials_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "material_name": {
+                                        "type": "string",
+                                        "example": "Material Name"
+                                    },
+                                    "chapter_name": {
+                                        "type": "string",
+                                        "example": "Chapter Name"
+                                    },
+                                    "chapter_order": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "chapter_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "sub_chapter_name": {
+                                        "type": "string",
+                                        "example": "Sub Chapter Name"
+                                    },
+                                    "sub_chapter_order": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "sub_chapter_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "speaker_name": {
+                                        "type": "string",
+                                        "example": "Speaker Name"
+                                    },
+                                    "speaker_job": {
+                                        "type": "string",
+                                        "example": "Speaker Job"
+                                    },
+                                    "speaker_summary": {
+                                        "type": "string",
+                                        "example": "Speaker Summary"
+                                    },
+                                    "company_speaker": {
+                                        "type": "string",
+                                        "example": "Company Speaker"
+                                    },
+                                    "speaker_image": {
+                                        "type": "string",
+                                        "example": "speaker.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Webinar created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Connected"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 1,
+                                                "title": "Webinar Title",
+                                                "description": "Webinar Description",
+                                                "discounted_price": 80,
+                                                "final_price": 80,
+                                                "webinar_date": "2023-10-01"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
+        {
+            "name": "Bootcamps",
+            "description": "Bootcamps"
+        },
         {
             "name": "Categories",
             "description": "Categories"
@@ -1775,12 +2978,20 @@
             "description": "Courses"
         },
         {
+            "name": "Order",
+            "description": "Order"
+        },
+        {
             "name": "Reviews",
             "description": "Reviews"
         },
         {
             "name": "Visitor",
             "description": "Visitor"
+        },
+        {
+            "name": "Webinars",
+            "description": "Webinars"
         }
     ]
 }

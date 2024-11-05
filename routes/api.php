@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BootcampController;
+use App\Http\Controllers\WebinarController;
+use App\Http\Controllers\SpeakerController;
+use App\Http\Controllers\MaterialController;
 
 
 
@@ -132,13 +135,13 @@ Route::prefix('v1')->group(function () {
  * All routes are handled by the CategoryController.
  */
 // Route::middleware(['admin'])->group(function () {
-    Route::prefix('v1')->group(function () {
-        Route::get('/category', [CategoryController::class, 'index']);
-        Route::post('/category', [CategoryController::class, 'store']);
-        Route::get('/category/{id}', [CategoryController::class, 'show']);
-        Route::put('/category/{id}', [CategoryController::class, 'update']);
-        Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
-    });
+Route::prefix('v1')->group(function () {
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
+    Route::put('/category/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+});
 // });
 
 /**
@@ -156,12 +159,51 @@ Route::prefix('v1')->group(function () {
 Route::post('/invoice', [OrderController::class, 'invoice']);
 Route::post('/callback', [OrderController::class, 'handleCallback']);
 Route::get('/order', [OrderController::class, 'index']);
+Route::post('/join-webinar/{webinar_id}', [OrderController::class, 'joinWebinar']);
+Route::get('/join-webinar/', function () {
+    return "Join Webinar";
+});
 
 
-Route::get('/bootcamp', [BootcampController::class, 'index']);
+/**
+ * API Routes for Bootcamp Management
+ *
+ * This file contains the following routes:
+ *
+ * - GET /bootcamps: Retrieve a list of all bootcamps.
+ * - POST /bootcamp: Create a new bootcamp.
+ * - GET /bootcamp/{id}: Retrieve details of a specific bootcamp by ID.
+ * - PUT /bootcamp/{id}: Update an existing bootcamp by ID.
+ * - DELETE /bootcamp/{id}: Delete a specific bootcamp by ID.
+ * - POST /bootcamp/{id}/register: Register for a specific bootcamp by ID.
+ * - GET /category/bootcamps: Retrieve bootcamps filtered by category.
+ *
+ * Each route is handled by the BootcampController.
+ */
+Route::get('/bootcamps', [BootcampController::class, 'index']);
 Route::post('/bootcamp', [BootcampController::class, 'create']);
 Route::get('/bootcamp/{id}', [BootcampController::class, 'show']);
-Route::post('/bootcamp/{id}', [BootcampController::class, 'update']);
+Route::put('/bootcamp/{id}', [BootcampController::class, 'update']);
 Route::delete('/bootcamp/{id}', [BootcampController::class, 'destroy']);
 Route::post('/bootcamp/{id}/register', [BootcampController::class, 'register']);
-Route::get('category/bootcamp/', [BootcampController::class, 'showByCategory']);
+Route::get('category/bootcamps/', [BootcampController::class, 'showByCategory']);
+
+
+
+// TODO : Dinamis Material, Chapter, dan Subchapter 
+// Menggunakan livewire state management agar lebih ringan 
+Route::get('/webinar', [WebinarController::class, 'index']);
+Route::get('/webinar/{id}', [WebinarController::class, 'show']);
+Route::post('/webinar', [WebinarController::class, 'store']);
+Route::post('/webinar/{id}', [WebinarController::class, 'update']);
+Route::delete('/webinar/{id}', [WebinarController::class, 'destroy']);
+
+
+Route::get('speaker', [SpeakerController::class, 'index']);
+Route::get('speaker/{id}', [SpeakerController::class, 'show']);
+Route::post('speaker', [SpeakerController::class, 'store']);
+Route::put('speaker/{id}', [SpeakerController::class, 'update']);
+Route::delete('speaker/{id}', [SpeakerController::class, 'destroy']);
+
+
+Route::get('/material', [MaterialController::class, 'index']);
