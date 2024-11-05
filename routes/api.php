@@ -135,13 +135,13 @@ Route::prefix('v1')->group(function () {
  * All routes are handled by the CategoryController.
  */
 // Route::middleware(['admin'])->group(function () {
-    Route::prefix('v1')->group(function () {
-        Route::get('/category', [CategoryController::class, 'index']);
-        Route::post('/category', [CategoryController::class, 'store']);
-        Route::get('/category/{id}', [CategoryController::class, 'show']);
-        Route::put('/category/{id}', [CategoryController::class, 'update']);
-        Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
-    });
+Route::prefix('v1')->group(function () {
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
+    Route::put('/category/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+});
 // });
 
 /**
@@ -186,6 +186,8 @@ Route::get('category/bootcamps/', [BootcampController::class, 'showByCategory'])
 
 
 
+// TODO : Dinamis Material, Chapter, dan Subchapter 
+// Menggunakan livewire state management agar lebih ringan 
 Route::get('/webinar', [WebinarController::class, 'index']);
 Route::get('/webinar/{id}', [WebinarController::class, 'show']);
 Route::post('/webinar', [WebinarController::class, 'store']);
@@ -201,4 +203,3 @@ Route::delete('speaker/{id}', [SpeakerController::class, 'destroy']);
 
 
 Route::get('/material', [MaterialController::class, 'index']);
-     

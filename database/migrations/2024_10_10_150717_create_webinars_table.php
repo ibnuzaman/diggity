@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('webinars', function (Blueprint $table) {            
+        Schema::create('webinars', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('image')->nullable();
@@ -27,14 +27,6 @@ return new class extends Migration
                 table: 'categories',
                 indexName: 'webinars_category_id_foreign'
             );
-            $table->foreignId('material_id')->contrained(
-                table: 'materials',
-                indexName: 'webinars_material_id_foreign'
-            );
-            $table->foreignId('speaker_id')->contrained(
-                table: 'speakers',
-                indexName: 'webinars_speaker_id_foreign'
-            );        
             $table->timestamps();
         });
     }

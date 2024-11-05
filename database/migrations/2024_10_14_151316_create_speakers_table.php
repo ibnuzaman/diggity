@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('speaker_name');
             $table->string('speaker_job');
             $table->text('speaker_summary');
-            $table->string('company_speaker')->notnull();
-            $table->string('speaker_image')->notnull();
+            $table->string('company_speaker')->nullable();
+            $table->string('speaker_image')->nullable();
             $table->uuid('webinar_id')->constrained(
-                table : 'webinars',
+                table: 'webinars',
                 indexName: 'speakers_webinar_id_foreign'
-            );                
+            );
             $table->timestamps();
         });
     }

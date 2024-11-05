@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('material_name');
+            $table->integer('material_count')->default(1);
             $table->uuid('webinar_id')->constrained(
                 table: 'webinars',
                 indexName: 'materials_webinar_id_foreign'

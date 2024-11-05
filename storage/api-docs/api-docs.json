@@ -2759,6 +2759,209 @@
                     }
                 }
             }
+        },
+        "/api/webinar": {
+            "post": {
+                "tags": [
+                    "Webinars"
+                ],
+                "summary": "Create a new webinar",
+                "operationId": "d5efc6817cfe44cbc109d4fde899a3e5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "webinar_date",
+                                    "start_time",
+                                    "end_time",
+                                    "meeting_room",
+                                    "starting_price",
+                                    "discounted_price",
+                                    "description",
+                                    "category_id",
+                                    "materials_count",
+                                    "material_name",
+                                    "chapter_name",
+                                    "chapter_order",
+                                    "chapter_count",
+                                    "sub_chapter_name",
+                                    "sub_chapter_order",
+                                    "sub_chapter_count",
+                                    "speaker_name",
+                                    "speaker_job",
+                                    "speaker_summary",
+                                    "company_speaker"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Webinar Title"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "image.jpg"
+                                    },
+                                    "webinar_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-10-01"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "10:00"
+                                    },
+                                    "end_time": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "12:00"
+                                    },
+                                    "meeting_room": {
+                                        "type": "string",
+                                        "example": "Room 101"
+                                    },
+                                    "starting_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100
+                                    },
+                                    "discounted_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 80
+                                    },
+                                    "final_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 80
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Webinar Description"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "materials_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "material_name": {
+                                        "type": "string",
+                                        "example": "Material Name"
+                                    },
+                                    "chapter_name": {
+                                        "type": "string",
+                                        "example": "Chapter Name"
+                                    },
+                                    "chapter_order": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "chapter_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "sub_chapter_name": {
+                                        "type": "string",
+                                        "example": "Sub Chapter Name"
+                                    },
+                                    "sub_chapter_order": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "sub_chapter_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "speaker_name": {
+                                        "type": "string",
+                                        "example": "Speaker Name"
+                                    },
+                                    "speaker_job": {
+                                        "type": "string",
+                                        "example": "Speaker Job"
+                                    },
+                                    "speaker_summary": {
+                                        "type": "string",
+                                        "example": "Speaker Summary"
+                                    },
+                                    "company_speaker": {
+                                        "type": "string",
+                                        "example": "Company Speaker"
+                                    },
+                                    "speaker_image": {
+                                        "type": "string",
+                                        "example": "speaker.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Webinar created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Connected"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 1,
+                                                "title": "Webinar Title",
+                                                "description": "Webinar Description",
+                                                "discounted_price": 80,
+                                                "final_price": 80,
+                                                "webinar_date": "2023-10-01"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -2785,6 +2988,10 @@
         {
             "name": "Visitor",
             "description": "Visitor"
+        },
+        {
+            "name": "Webinars",
+            "description": "Webinars"
         }
     ]
 }

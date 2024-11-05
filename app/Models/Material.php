@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
@@ -11,8 +10,9 @@ class Material extends Model
     use HasUuids;
 
     protected $fillable = [
-        'material_name',        
+        'material_name',
         'webinar_id',
+        'material_count'
     ];
 
     public function webinar()
@@ -20,8 +20,8 @@ class Material extends Model
         return $this->belongsTo(Webinar::class);
     }
 
-    public function chapters()
+    public function SubMaterials()
     {
-        return $this->hasMany(Chapter::class);
+        return $this->hasMany(SubMaterials::class);
     }
 }
