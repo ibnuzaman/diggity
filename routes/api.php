@@ -195,7 +195,7 @@ Route::get('category/bootcamps/', [BootcampController::class, 'showByCategory'])
 Route::get('/webinar', [WebinarController::class, 'index']);
 Route::get('/webinar/{id}', [WebinarController::class, 'show']);
 Route::post('/webinar', [WebinarController::class, 'store']);
-Route::put('/webinar/{id}', [WebinarController::class, 'update']);
+Route::post('/webinar/{id}', [WebinarController::class, 'update']);
 Route::delete('/webinar/{id}', [WebinarController::class, 'destroy']);
 
 

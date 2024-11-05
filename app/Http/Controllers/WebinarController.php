@@ -7,13 +7,15 @@ use App\Models\Webinar;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Material;
 use App\Models\SubMaterials;
+use Illuminate\Support\Facades\Log;
 
 class WebinarController extends Controller
 {
+
     public function index(Request $request)
     {
         try {
-            $query = Webinar::select('id', 'title', 'description', 'discounted_price', 'final_price', 'webinar_date');
+            $query = Webinar::select('id', 'image', 'title', 'description', 'starting_price', 'final_price', 'webinar_date');
 
             if ($request->has('category_id')) {
                 $query->where('category_id', $request->category_id);
@@ -76,7 +78,7 @@ class WebinarController extends Controller
         try {
             $validateData = $request->validate([
                 'title' => 'required|string',
-                'image' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'webinar_date' => 'required|date',
                 'start_time' => 'required|date_format:H:i',
                 'end_time' => 'required|date_format:H:i',
@@ -120,7 +122,7 @@ class WebinarController extends Controller
 
             $webinar = new Webinar();
             $webinar->title = $validateData['title'];
-            $webinar->image = $validateData['image'] ?? null;
+            $webinar->image = $request->file('image')->store('webinars', 'public') ?? null;
             $webinar->webinar_date = $validateData['webinar_date'];
             $webinar->start_time = $validateData['start_time'];
             $webinar->end_time = $validateData['end_time'];
@@ -174,9 +176,18 @@ class WebinarController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $webinar = Webinar::find($id);
+            if (!$webinar) {
+                return response()->json([
+                    'message' => 'Data not found',
+                    'status' => 'Failed',
+                    'data' => null,
+                ], Response::HTTP_NOT_FOUND);
+            }
+
             $validateData = $request->validate([
                 'title' => 'required|string',
-                'image' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'webinar_date' => 'required|date',
                 'start_time' => 'required|date_format:H:i',
                 'end_time' => 'required|date_format:H:i',
@@ -218,17 +229,12 @@ class WebinarController extends Controller
                 }
             }
 
-            $webinar = Webinar::find($id);
-            if (!$webinar) {
-                return response()->json([
-                    'message' => 'Data not found',
-                    'status' => 'Failed',
-                    'data' => null,
-                ], Response::HTTP_NOT_FOUND);
-            }
+
 
             $webinar->title = $validateData['title'];
-            $webinar->image = $validateData['image'] ?? null;
+            if ($request->hasFile('image')) {
+                $webinar->image = $request->file('image')->store('webinars', 'public');
+            }
             $webinar->webinar_date = $validateData['webinar_date'];
             $webinar->start_time = $validateData['start_time'];
             $webinar->end_time = $validateData['end_time'];
@@ -238,6 +244,7 @@ class WebinarController extends Controller
             $webinar->final_price = $validateData['discounted_price'] ? $validateData['starting_price'] - $validateData['discounted_price'] : $validateData['starting_price'];
             $webinar->description = $validateData['description'];
             $webinar->category_id = $validateData['category_id'];
+            // dd($webinar);   
             $webinar->save();
 
             foreach ($webinar->materials as $material) {
@@ -270,6 +277,7 @@ class WebinarController extends Controller
                 'speaker_description' => $validateData['speaker_description'] ?? null,
                 'company_speaker' => $validateData['company_speaker'] ?? null,
             ]);
+            // dd($webinar);
 
             return response()->json([
                 'message' => 'Webinar updated successfully',
