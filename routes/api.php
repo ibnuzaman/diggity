@@ -159,6 +159,10 @@ Route::prefix('v1')->group(function () {
 Route::post('/invoice', [OrderController::class, 'invoice']);
 Route::post('/callback', [OrderController::class, 'handleCallback']);
 Route::get('/order', [OrderController::class, 'index']);
+Route::post('/join-webinar/{webinar_id}', [OrderController::class, 'joinWebinar']);
+Route::get('/join-webinar/', function () {
+    return "Join Webinar";
+});
 
 
 /**

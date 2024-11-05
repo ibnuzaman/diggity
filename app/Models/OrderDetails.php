@@ -23,10 +23,12 @@ class OrderDetails extends Model
         'status',
         'user_id',
         'course_id',
+        'webinar_id',
     ];
 
     protected static function boot()
     {
+
         parent::boot();
 
         static::creating(function ($model) {
@@ -45,11 +47,13 @@ class OrderDetails extends Model
         });
 
         static::creating(function ($model) {
-            $model->course->increment('subscriber');
+            if ($model->course) {
+                $model->course->increment('subscriber');
+            }
         });
 
         static::updated(function ($model) {
-            if ($model->status === 'success') {
+            if ($model->status === 'success' && $model->course) {
                 $model->course->increment('subscriber');
             }
         });
@@ -63,5 +67,10 @@ class OrderDetails extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function Webinar()
+    {
+        return $this->belongsTo(Webinar::class);
     }
 }

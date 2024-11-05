@@ -108,6 +108,16 @@ class WebinarController extends Controller
                 ], Response::HTTP_BAD_REQUEST);
             }
 
+            foreach ($validateData['materials'] as $material) {
+                if (count($material['sub_materials']) != $validateData['sub_material_count']) {
+                    return response()->json([
+                        'message' => 'Jumlah sub material harus ' . $validateData['sub_material_count'],
+                        'status' => 'Failed',
+                        'data' => null,
+                    ], Response::HTTP_BAD_REQUEST);
+                }
+            }
+
             $webinar = new Webinar();
             $webinar->title = $validateData['title'];
             $webinar->image = $validateData['image'] ?? null;
@@ -122,6 +132,22 @@ class WebinarController extends Controller
             $webinar->category_id = $validateData['category_id'];
             $webinar->save();
 
+            foreach ($validateData['materials'] as $material) {
+                $newMaterial = new Material([
+                    'material_name' => $material['material_name'],
+                ]);
+                $webinar->materials()->save($newMaterial);
+
+                foreach ($material['sub_materials'] as $subMaterial) {
+                    $newSubMaterial = new SubMaterials([
+                        'sub_material_count' => $validateData['sub_material_count'],
+                        'sub_material_name' => $subMaterial['sub_material_name'],
+                        'sub_material_order' => $subMaterial['sub_material_order'],
+                    ]);
+                    $newMaterial->subMaterials()->save($newSubMaterial);
+                }
+            }
+
             $webinar->speakers()->create([
                 'speaker_name' => $validateData['speaker_name'],
                 'speaker_job' => $validateData['speaker_job'] ?? null,
@@ -130,28 +156,6 @@ class WebinarController extends Controller
                 'speaker_description' => $validateData['speaker_description'] ?? null,
                 'company_speaker' => $validateData['company_speaker'] ?? null,
             ]);
-
-            foreach ($validateData['materials'] as $material) {
-                $newMaterial = new Material([
-                    'material_name' => $material['material_name'],
-                ]);
-                $webinar->materials()->save($newMaterial);
-                if (count($material['sub_materials']) != $validateData['sub_material_count']) {
-                    return response()->json([
-                        'message' => 'Jumlah sub material harus ' . $validateData['sub_material_count'],
-                        'status' => 'Failed',
-                        'data' => null,
-                    ], Response::HTTP_BAD_REQUEST);
-                }
-
-                foreach ($material['sub_materials'] as $subMaterial) {
-                    $newSubMaterial = new SubMaterials([
-                        'sub_material_name' => $subMaterial['sub_material_name'],
-                        'sub_material_order' => $subMaterial['sub_material_order'],
-                    ]);
-                    $newMaterial->subMaterials()->save($newSubMaterial);
-                }
-            }
 
             return response()->json([
                 'message' => 'Webinar created successfully',
@@ -198,10 +202,20 @@ class WebinarController extends Controller
 
             if (count($validateData['materials']) != $validateData['material_count']) {
                 return response()->json([
-                    'message' => 'Material count does not match the number of materials provided',
+                    'message' => 'Jumlah materi harus ' . $validateData['material_count'],
                     'status' => 'Failed',
                     'data' => null,
                 ], Response::HTTP_BAD_REQUEST);
+            }
+
+            foreach ($validateData['materials'] as $material) {
+                if (count($material['sub_materials']) != $validateData['sub_material_count']) {
+                    return response()->json([
+                        'message' => 'Jumlah sub material harus ' . $validateData['sub_material_count'],
+                        'status' => 'Failed',
+                        'data' => null,
+                    ], Response::HTTP_BAD_REQUEST);
+                }
             }
 
             $webinar = Webinar::find($id);
@@ -226,40 +240,36 @@ class WebinarController extends Controller
             $webinar->category_id = $validateData['category_id'];
             $webinar->save();
 
-            $webinar->speakers()->updateOrCreate(
-                ['webinar_id' => $webinar->id],
-                [
-                    'speaker_name' => $validateData['speaker_name'],
-                    'speaker_job' => $validateData['speaker_job'] ?? null,
-                    'speaker_summary' => $validateData['speaker_summary'] ?? null,
-                    'speaker_image' => $validateData['speaker_image'] ?? null,
-                    'speaker_description' => $validateData['speaker_description'] ?? null,
-                    'company_speaker' => $validateData['company_speaker'] ?? null,
-                ]
-            );
-
+            foreach ($webinar->materials as $material) {
+                $material->subMaterials()->delete();
+            }
             $webinar->materials()->delete();
+
             foreach ($validateData['materials'] as $material) {
                 $newMaterial = new Material([
                     'material_name' => $material['material_name'],
                 ]);
                 $webinar->materials()->save($newMaterial);
-                if (count($material['sub_materials']) != $validateData['sub_material_count']) {
-                    return response()->json([
-                        'message' => 'Sub material count does not match the number of sub materials provided',
-                        'status' => 'Failed',
-                        'data' => null,
-                    ], Response::HTTP_BAD_REQUEST);
-                }
 
                 foreach ($material['sub_materials'] as $subMaterial) {
                     $newSubMaterial = new SubMaterials([
+                        'sub_material_count' => $validateData['sub_material_count'],
                         'sub_material_name' => $subMaterial['sub_material_name'],
                         'sub_material_order' => $subMaterial['sub_material_order'],
                     ]);
                     $newMaterial->subMaterials()->save($newSubMaterial);
                 }
             }
+
+            $webinar->speakers()->delete();
+            $webinar->speakers()->create([
+                'speaker_name' => $validateData['speaker_name'],
+                'speaker_job' => $validateData['speaker_job'] ?? null,
+                'speaker_summary' => $validateData['speaker_summary'] ?? null,
+                'speaker_image' => $validateData['speaker_image'] ?? null,
+                'speaker_description' => $validateData['speaker_description'] ?? null,
+                'company_speaker' => $validateData['company_speaker'] ?? null,
+            ]);
 
             return response()->json([
                 'message' => 'Webinar updated successfully',
@@ -279,22 +289,40 @@ class WebinarController extends Controller
     {
         try {
             $webinar = Webinar::find($id);
+
             if (!$webinar) {
                 return response()->json([
-                    'message' => Response::HTTP_NOT_FOUND,
+                    'message' => 'Data not found',
                     'status' => 'Failed',
-                    'data' => 'Data not found',
+                    'data' => null,
                 ], Response::HTTP_NOT_FOUND);
             }
+
+            $orderDetailsCount = $webinar->orderDetails()->count();
+            if ($orderDetailsCount > 0) {
+                $webinar->orderDetails()->delete();
+            }
+
+
+            $webinar->speakers()->delete();
+
+
+            foreach ($webinar->materials as $material) {
+                $material->subMaterials()->delete();
+                $material->delete();
+            }
+
+
             $webinar->delete();
+
             return response()->json([
-                'message' => Response::HTTP_OK,
+                'message' => 'Data deleted successfully',
                 'status' => 'Connected',
-                'data' => 'Data deleted successfully',
+                'data' => null,
             ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => Response::HTTP_BAD_REQUEST,
+                'message' => 'Failed to delete webinar',
                 'status' => 'Failed',
                 'data' => $e->getMessage(),
             ], Response::HTTP_BAD_REQUEST);

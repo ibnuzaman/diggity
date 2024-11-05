@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Webinar extends Model
 {
-    use HasUuids;    
+    use HasUuids;
 
     protected $fillable = [
         'title',
@@ -25,7 +25,7 @@ class Webinar extends Model
         'material_id',
         'speaker_id'
     ];
-    
+
     public function materials()
     {
         return $this->hasMany(Material::class);
@@ -34,5 +34,10 @@ class Webinar extends Model
     public function speakers()
     {
         return $this->hasMany(Speaker::class);
+    }
+
+    public function OrderDetails()
+    {
+        return $this->hasMany(OrderDetails::class);
     }
 }

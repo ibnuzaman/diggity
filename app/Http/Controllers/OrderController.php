@@ -11,6 +11,7 @@ use Xendit\Invoice\InvoiceApi;
 use Xendit\Invoice\InvoiceItem;
 use App\Models\Course;
 use Illuminate\Http\Response;
+use App\Models\Webinar;
 
 class OrderController extends Controller
 {
@@ -108,7 +109,7 @@ class OrderController extends Controller
      */
     public function invoice(Request $request)
     {
-        try {            
+        try {
 
             $user = User::find($request->input('user_id'));
             $course = Course::find($request->input('course_id'));
@@ -124,7 +125,7 @@ class OrderController extends Controller
                     'message' => 'Course not found',
                 ], Response::HTTP_NOT_FOUND);
             }
-            
+
             $no_transaction = 'DGT-' . strtoupper(uniqid());
             $external_id = 'DGID-' . strtoupper(uniqid());
             $order = new OrderDetails();
@@ -139,22 +140,22 @@ class OrderController extends Controller
                 'external_id' => $external_id,
                 'payer_email' => User::find($request->input('user_id'))->email,
                 'amount' => $order->total_price,
-                'invoice_duration' => 172800,                
+                'invoice_duration' => 172800,
             ]);
 
             $apiInstance = new InvoiceApi();
             $generateInvoice = $apiInstance->createInvoice($createInvoice);
-            $order->invoice_url = $generateInvoice['invoice_url'];  
-            
+            $order->invoice_url = $generateInvoice['invoice_url'];
+
             $order->status = $request->input('status', 'pending');
             $order->user_id = $request->input('user_id');
             $order->course_id = $request->input('course_id');
-            $order->no_transaction = $no_transaction;                
+            $order->no_transaction = $no_transaction;
 
             $item = new InvoiceItem([
-                'price' => $order->price                
+                'price' => $order->price
             ]);
-                 
+
 
             if ($order->status === 'pending') {
                 Course::find($request->input('course_id'))->decrement('subscriber');
@@ -175,7 +176,7 @@ class OrderController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     public function handleCallback(Request $request)
     {
         $getToken = $request->headers->get('x-callback-token');
@@ -229,5 +230,49 @@ class OrderController extends Controller
                 'error' => $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    // TODO : Order Webinar redirect to whatsapp
+
+    public function JoinWebinar(Request $request, $webinar_id)
+    {
+        $user = User::find($request->input('user_id')); // hard code user_id        
+        $webinar = Webinar::find($webinar_id);
+        if (!$user) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'User not found',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if (!$webinar) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'Webinar not found',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $no_transaction = 'DGT-' . strtoupper(uniqid());
+        $external_id = 'DGID-' . strtoupper(uniqid());
+
+        $order = new OrderDetails();
+        $order->external_id = $external_id;
+        $order->no_transaction = $no_transaction;
+        $order->user_id = $user->id;
+        $order->status = 'webinar';
+        $order->webinar_id = $webinar_id;
+        $order->save();
+
+        $message = "Halo, " . $user->name . "!\n";
+        $message .= "Terima kasih telah melakukan pembayaran webinar " . $webinar->title . ".\n";
+        $message .= "Silahkan klik link berikut untuk mengikuti webinar: " . $webinar->link . "\n";
+        $message .= "Jika ada pertanyaan, silahkan hubungi kami melalui email: " . env('MAIL_FROM_ADDRESS') . "\n";
+        $message .= "Terima kasih.";
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Redirect to whatsapp',
+            'data' => $message,
+        ]);
     }
 }
