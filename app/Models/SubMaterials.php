@@ -11,9 +11,9 @@ class SubMaterials extends Model
 
     protected $fillable = [
         'sub_material_name',
+        'sub_material_count',
         'sub_material_order',
-        'material_id',
-        'sub_material_count'
+        'material_id'
     ];
 
     public function material()
