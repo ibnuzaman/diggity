@@ -65,42 +65,42 @@ class FilterCourseController extends Controller
         }
     }
 
- /**
- * @OA\Get(
- *     path="/api/v1/courses/top-rated",
- *     summary="Get the top-rated courses",
- *     tags={"Courses"},
- *     @OA\Response(
- *         response=200,
- *         description="Successful response",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                 property="data",
- *                 type="array",
- *                 @OA\Items(
- *                     type="object",
- *                     @OA\Property(property="id", type="integer", example=1),
- *                     @OA\Property(property="name", type="string", example="Course Name"),
- *                     @OA\Property(property="reviews_avg_rating", type="string", example="4.5")
- *                 )
- *             )
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Bad request",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                 property="error",
- *                 type="string",
- *                 example="Invalid request parameters"
- *             )
- *         )
- *     )
- * )
- */
+    /**
+     * @OA\Get(
+     *     path="/api/v1/courses/top-rated",
+     *     summary="Get the top-rated courses",
+     *     tags={"Courses"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(property="id", type="integer", example=1),
+     *                     @OA\Property(property="name", type="string", example="Course Name"),
+     *                     @OA\Property(property="reviews_avg_rating", type="string", example="4.5")
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="error",
+     *                 type="string",
+     *                 example="Invalid request parameters"
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function byTopRatedCourses()
     {
         return response()->json([
@@ -115,42 +115,42 @@ class FilterCourseController extends Controller
         ], Response::HTTP_OK);
     }
 
- /**
- * @OA\Get(
- *     path="/api/v1/courses/popular",
- *     summary="Get the popular courses",
- *     tags={"Courses"},
- *     @OA\Response(
- *         response=200,
- *         description="Successful response",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                 property="data",
- *                 type="array",
- *                 @OA\Items(
- *                     type="object",
- *                     @OA\Property(property="id", type="integer", example=1),
- *                     @OA\Property(property="name", type="string", example="Course Name"),
- *                     @OA\Property(property="reviews_avg_rating", type="string", example="4.5")
- *                 )
- *             )
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Bad request",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                 property="error",
- *                 type="string",
- *                 example="Invalid request parameters"
- *             )
- *         )
- *     )
- * )
- */
+    /**
+     * @OA\Get(
+     *     path="/api/v1/courses/popular",
+     *     summary="Get the popular courses",
+     *     tags={"Courses"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(property="id", type="integer", example=1),
+     *                     @OA\Property(property="name", type="string", example="Course Name"),
+     *                     @OA\Property(property="reviews_avg_rating", type="string", example="4.5")
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad request",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="error",
+     *                 type="string",
+     *                 example="Invalid request parameters"
+     *             )
+     *         )
+     *     )
+     * )
+     */
 
     public function byPopularCourses()
     {
@@ -166,7 +166,7 @@ class FilterCourseController extends Controller
         ], Response::HTTP_OK);
     }
 
-    
+
     /**
      * @OA\Get(
      *     path="/api/v1/courses/by-category",
@@ -210,36 +210,7 @@ class FilterCourseController extends Controller
      *     )
      * )
      */
-    public function byCategoryCourses(Request $request)
-    {
-        $categoryId = $request->query('category_id');        
-        $categoryIdsArray = explode(',', $categoryId);    
-
-        $cekCategory = Course::join('course_categories', 'courses.id', '=', 'course_categories.course_id')
-            ->join('categories', 'course_categories.category_id', '=', 'categories.id')
-            ->whereIn('course_categories.category_id', $categoryIdsArray)
-            ->exists();
-        if (!$cekCategory) {
-            return response()->json([
-                'status' => Response::HTTP_BAD_REQUEST,
-                'error' => 'Invalid request parameters',
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'data' => Course::withAvg('reviews', 'rating')            
-                ->join('course_categories', 'courses.id', '=', 'course_categories.course_id')
-                ->join('categories', 'course_categories.category_id', '=', 'categories.id')
-                ->whereIn('course_categories.category_id', $categoryIdsArray)
-                ->paginate(6)
-                ->through(function ($course) {
-                    $course->reviews_avg_rating = number_format($course->reviews_avg_rating, 1);
-                    return $course;
-                }),
-                
-        ], Response::HTTP_OK);
-    }
+    public function byCategoryCourses(Request $request) {}
 
     /**
      * @OA\Get(

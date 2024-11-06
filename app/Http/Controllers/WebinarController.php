@@ -7,7 +7,6 @@ use App\Models\Webinar;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Material;
 use App\Models\SubMaterials;
-use Illuminate\Support\Facades\Log;
 
 class WebinarController extends Controller
 {
@@ -18,7 +17,8 @@ class WebinarController extends Controller
             $query = Webinar::select('id', 'image', 'title', 'description', 'starting_price', 'final_price', 'webinar_date');
 
             if ($request->has('category_id')) {
-                $query->where('category_id', $request->category_id);
+                $categoryIds = explode(',', $request->category_id);
+                $query->whereIn('category_id', $categoryIds);
             }
 
             $data = $query->latest()->paginate(6);
@@ -75,6 +75,7 @@ class WebinarController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             $validateData = $request->validate([
                 'title' => 'required|string',
@@ -88,10 +89,9 @@ class WebinarController extends Controller
                 'final_price' => 'nullable|numeric',
                 'description' => 'required|string',
                 'category_id' => 'required|exists:categories,id',
-                'material_count' => 'required|integer',
-                'sub_material_count' => 'required|integer',
                 'materials' => 'required|array',
                 'materials.*.material_name' => 'required|string',
+                'materials.*.sub_material_count' => 'required|integer',
                 'materials.*.sub_materials' => 'required|array',
                 'materials.*.sub_materials.*.sub_material_name' => 'required|string',
                 'materials.*.sub_materials.*.sub_material_order' => 'required|integer',
@@ -102,18 +102,10 @@ class WebinarController extends Controller
                 'company_speaker' => 'nullable|string',
             ]);
 
-            if (count($validateData['materials']) != $validateData['material_count']) {
-                return response()->json([
-                    'message' => 'Jumlah materi harus ' . $validateData['material_count'],
-                    'status' => 'Failed',
-                    'data' => null,
-                ], Response::HTTP_BAD_REQUEST);
-            }
-
             foreach ($validateData['materials'] as $material) {
-                if (count($material['sub_materials']) != $validateData['sub_material_count']) {
+                if (count($material['sub_materials']) != $material['sub_material_count']) {
                     return response()->json([
-                        'message' => 'Jumlah sub material harus ' . $validateData['sub_material_count'],
+                        'message' => 'Jumlah sub material untuk ' . $material['material_name'] . ' harus ' . $material['sub_material_count'],
                         'status' => 'Failed',
                         'data' => null,
                     ], Response::HTTP_BAD_REQUEST);
@@ -142,7 +134,7 @@ class WebinarController extends Controller
 
                 foreach ($material['sub_materials'] as $subMaterial) {
                     $newSubMaterial = new SubMaterials([
-                        'sub_material_count' => $validateData['sub_material_count'],
+                        'sub_material_count' => $material['sub_material_count'],
                         'sub_material_name' => $subMaterial['sub_material_name'],
                         'sub_material_order' => $subMaterial['sub_material_order'],
                     ]);
